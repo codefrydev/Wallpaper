@@ -5,15 +5,3 @@
     <MudPaper Width="100%" Height="49vh" @onclick="GenerativeSelected" />
     <MudPaper Width="100%" Height="49vh" @onclick="CreativeSelected"/> 
 </MudPaper>
-
-@code{
-    [Inject] public NavigationManager NavigationManager { get; set; } = null!;
-    void GenerativeSelected()
-    {
-        NavigationManager.NavigateTo("Generative");
-    }
-    void CreativeSelected()
-    {
-        NavigationManager.NavigateTo("Creative");
-    }
-}

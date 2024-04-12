@@ -1,1 +1,10 @@
 ﻿@page "/Generative"
+
+<SKCanvasView @ref="canvasReference"
+              OnPaintSurface="@OnPaintSurface"
+              style="@($"height: {Height}px; width: {Width}px;")"
+              @onclick="ButtonClicked" id="@id"/>
+
+<MudButton OnClick="DownloadImage">
+    Download Image
+</MudButton>
