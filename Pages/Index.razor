@@ -1,7 +1,28 @@
 ﻿@page "/"
 <PageTitle>Wallpaper</PageTitle>
 
-<MudPaper Class="d-flex flex-column flex-grow-1 gap-2" Elevation="0">
-    <MudPaper Width="100%" Height="49vh" @onclick="GenerativeSelected" />
-    <MudPaper Width="100%" Height="49vh" @onclick="CreativeSelected"/> 
-</MudPaper>
+<MudPaper Elevation="0" Style="background-color:#e5e9f4"> 
+    @foreach (var mode in modes)
+    {
+        <MudPaper 
+            Class="d-flex justify-center flex-grow-1 pa-5 " 
+            Elevation="0" 
+            Style="background-color:#e5e9f4"
+            @onmouseenter="@(()=>MouseEnter(mode))"
+            @onmouseout="@(()=>MouseExit(mode))">
+            <MudPaper MinWidth="90%"
+                      Height="45vh"
+                      Class="d-flex align-content-center justify-center flex-wrap modeIsHovering"
+                      @onclick="@(()=>Selected(mode))">
+                        @mode.Name 
+            </MudPaper>
+        </MudPaper>
+    }
+</MudPaper> 
+<style>
+    .modeIsHovering:hover
+    {
+        color:lightgreen;
+        background:black;
+    }
+</style>

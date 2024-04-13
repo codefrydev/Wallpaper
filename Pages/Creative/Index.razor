@@ -1,8 +1,15 @@
 ﻿@page "/Creative"
 
-<MudPaper Class="d-flex flex-wrap gap-4" MaxWidth="528px" Elevation="0">
+<MudPaper Class="d-flex flex-wrap justify-center" Elevation="0">
     @foreach(var item in images)
     {
-        <MudImage Src="@item.ThumbNailUrl" Width="200" Height="150" Alt="Swedish Farm House" Elevation="25" Class="rounded-lg ma-4" @onclick="@(()=>OpenDialog(item))" />
+        <MudImage 
+            Src="@item.ThumbNailUrl" 
+            Width="200" 
+            Height="150" 
+            Alt="@item.Description" 
+            Elevation="25" 
+            Class="rounded-lg ma-2" 
+            @onclick="@(()=>OpenDialog(item))" />
     }
 </MudPaper>

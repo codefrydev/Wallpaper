@@ -1,10 +1,16 @@
 ﻿@page "/Generative"
 
-<SKCanvasView @ref="canvasReference"
-              OnPaintSurface="@OnPaintSurface"
-              style="@($"height: {Height}px; width: {Width}px;")"
-              @onclick="ButtonClicked" id="@id"/>
-
-<MudButton OnClick="DownloadImage">
-    Download Image
-</MudButton>
+<MudPaper 
+    Class="d-flex flex-wrap justify-center"
+    Elevation="0" 
+    Style="background-color:#e5e9f4">
+    @foreach (var item in generativeDraws)
+    {
+        <MudPaper Class="d-flex justify-center ma-2">
+            <SKCanvasView 
+                @ref="item.CanvasReference"
+                OnPaintSurface="@item.OnPaintSurface" 
+                @onclick="@item.ButtonClicked" id="@item.Id" />
+        </MudPaper>
+    }
+</MudPaper>

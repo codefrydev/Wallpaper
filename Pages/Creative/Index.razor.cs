@@ -16,6 +16,55 @@ namespace Wallpaper.Pages.Creative
                 ThumbNailUrl = "https://picsum.photos/200/300",
                 Name = "Abhijeet"
             });
+            images.Add(new Drawing()
+            {
+                OriginalDrawingUrl = "https://picsum.photos/200/300",
+                ThumbNailUrl = "https://picsum.photos/200/300",
+                Name = "Abhijeet"
+            });
+            images.Add(new Drawing()
+            {
+                OriginalDrawingUrl = "https://picsum.photos/200/300",
+                ThumbNailUrl = "https://picsum.photos/200/300",
+                Name = "Abhijeet"
+            });
+            images.Add(new Drawing()
+            {
+                OriginalDrawingUrl = "https://picsum.photos/200/300",
+                ThumbNailUrl = "https://picsum.photos/200/300",
+                Name = "Abhijeet"
+            });
+            images.Add(new Drawing()
+            {
+                OriginalDrawingUrl = "https://picsum.photos/200/300",
+                ThumbNailUrl = "https://picsum.photos/200/300",
+                Name = "Abhijeet"
+            });
+            images.Add(new Drawing()
+            {
+                OriginalDrawingUrl = "https://picsum.photos/200/300",
+                ThumbNailUrl = "https://picsum.photos/200/300",
+                Name = "Abhijeet"
+            });
+            images.Add(new Drawing()
+            {
+                OriginalDrawingUrl = "https://picsum.photos/200/300",
+                ThumbNailUrl = "https://picsum.photos/200/300",
+                Name = "Abhijeet"
+            });
+            images.Add(new Drawing()
+            {
+                OriginalDrawingUrl = "https://picsum.photos/200/300",
+                ThumbNailUrl = "https://picsum.photos/200/300",
+                Name = "Abhijeet"
+            });
+            images.Add(new Drawing()
+            {
+                OriginalDrawingUrl = "https://picsum.photos/200/300",
+                ThumbNailUrl = "https://picsum.photos/200/300",
+                Name = "Abhijeet"
+            });
+
         }
         private void OpenDialog(Drawing drawing)
         {
