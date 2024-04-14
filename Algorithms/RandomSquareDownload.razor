@@ -31,7 +31,7 @@
             <SKCanvasView @ref="data.CanvasReference"
                           OnPaintSurface="@data.OnPaintSurface"
                           style="@($"height: {data.Height}px; width: {data.Width}px;")"
-                          id="@data.Id" />
+                          id="@data.Id" IgnorePixelScaling=true />
         </MudItem>
     </MudStack>
 }

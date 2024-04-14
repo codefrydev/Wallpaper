@@ -66,10 +66,9 @@
         <MudItem>
 
             <SKCanvasView @ref="circlePopulationRef.CanvasReference"
-                          OnPaintSurface="@circlePopulationRef.OnPaintSurface"
-                          Width="@($"{circlePopulationRef.Width}px")" Height="@($"{circlePopulationRef.Height}px")"
+                          OnPaintSurface="@circlePopulationRef.OnPaintSurface" 
                           style="@($"height: {circlePopulationRef.Height}px; width: {circlePopulationRef.Width}px;")"
-                          id="@circlePopulationRef.Id" /> 
+                          id="@circlePopulationRef.Id" IgnorePixelScaling=true/> 
         </MudItem>
     </MudStack>
 }
