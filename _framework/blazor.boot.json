@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Wallpaper",
   "resources": {
-    "hash": "sha256-N0RH5nXkQn5t/+se7NvEb6/WVwi1R5h+hAtPeegJ5cY=",
+    "hash": "sha256-K+2dTSmK9lgL6mFjyayO7/2EFzP6lQvKc0xzoGX2VO8=",
     "jsModuleNative": {
       "dotnet.native.8.0.4.ga65odbxmj.js": "sha256-g3GOqTLOVaoLqtGly9zDM3s009gHZGbr12ZhfDOuwRg="
     },
@@ -61,7 +61,7 @@
       "System.Text.RegularExpressions.wasm": "sha256-EtwL+5hTRoiofFV/N6/KGZG52X0ROnl69qt/5gBK0SM=",
       "System.Threading.wasm": "sha256-WZ67IkKnMZXsZBKgPij/Wue9KklRaZeRmmjEHdtkPKo=",
       "System.wasm": "sha256-j40bDq1kzFWVIkWKSn7zhVhRD7pPJwcCQwpWvGrmz9A=",
-      "Wallpaper.wasm": "sha256-jooVI849GfwyDxKDcekjaQYBDSwD1Jw39iQMG3zNzfo="
+      "Wallpaper.wasm": "sha256-mR154s/n5Rif18jPSWrqjM2DveWHK0gdhB7n8HPhoqA="
     }
   },
   "cacheBootResources": true,
