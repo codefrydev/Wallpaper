@@ -2,11 +2,11 @@
 using SkiaSharp.Views.Blazor;
 using Wallpaper.Models;
 
-namespace Wallpaper.Pages.Generative.Algorithms
+namespace Wallpaper.Algorithms
 {
     public class CirclePopulation : IGenerativeDraw
     {
-
+        public string DownloadPath { get; } = "download/CirclePopulation";
         public SKCanvasView CanvasReference { get; set; } = new();
         public float Width { get; set; } = 300;
         public float Height { get; set; } = 300;
@@ -14,25 +14,23 @@ namespace Wallpaper.Pages.Generative.Algorithms
         Random random = new();
 
         List<(int x, int y, int radius)> circles = [];
-        int minRadius = 2;
-        int maxRadius = 100;
-        int totalCircles = 1200;
-        int createCircleAttempts = 500;
+        public int minRadius = 2;
+        public int maxRadius = 100;
+        public int totalCircles = 1200;
+        public int createCircleAttempts = 500;
 
-        int width = 1200;
-        int height = 700;
-        public void ButtonClicked()
+        public int width = 1200;
+        public int height = 700;
+        public async Task ButtonClicked()
         {
             circles = [];
             CanvasReference.Invalidate();
         }
-
         public void OnPaintSurface(SKPaintSurfaceEventArgs e)
         {
             width = (int)Width;
             height = (int)Height;
             var canvas = e.Surface.Canvas;
-
             canvas.Clear(SKColor.Parse("#fff"));
 
             SKPaint paint = new()

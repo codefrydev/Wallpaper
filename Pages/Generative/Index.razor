@@ -9,8 +9,9 @@
         <MudPaper Class="d-flex justify-center ma-2">
             <SKCanvasView 
                 @ref="item.CanvasReference"
-                OnPaintSurface="@item.OnPaintSurface" 
-                @onclick="@item.ButtonClicked" id="@item.Id" />
+                OnPaintSurface="@item.OnPaintSurface"
+                style="@($"height: {item.Height}px; width: {item.Width}px;")"
+                @onclick="@(()=>NavigateTo(item))" id="@item.Id" />
         </MudPaper>
     }
 </MudPaper>

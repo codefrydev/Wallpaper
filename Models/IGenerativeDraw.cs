@@ -8,7 +8,8 @@ namespace Wallpaper.Models
         float Height { get; set; }
         float Width { get; set; }
         Guid Id { get; set; }
-        void ButtonClicked();
+        Task ButtonClicked();
+        string DownloadPath { get; }
         void OnPaintSurface(SKPaintSurfaceEventArgs e);
     }
 }

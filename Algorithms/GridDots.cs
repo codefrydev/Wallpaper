@@ -2,22 +2,24 @@
 using SkiaSharp.Views.Blazor;
 using Wallpaper.Models;
 
-namespace Wallpaper.Pages.Generative.Algorithms
+namespace Wallpaper.Algorithms
 {
     public class GridDots : IGenerativeDraw
     {
+        public string DownloadPath { get; } = "download/GridDots";
         public SKCanvasView CanvasReference { get; set; } = new();
         public float Width { get; set; } = 300;
         public float Height { get; set; } = 300;
+        public int step { get; set; } = 30;
         public Guid Id { get; set; } = Guid.NewGuid();
-        public void ButtonClicked()
+        public async Task ButtonClicked()
         {
             CanvasReference.Invalidate();
         }
 
         public void OnPaintSurface(SKPaintSurfaceEventArgs e)
         {
-            int step = 30;
+            step = 30;
             var canvas = e.Surface.Canvas;
             canvas.Clear(SKColor.Parse("#fff"));
             SKPaint paint = new()

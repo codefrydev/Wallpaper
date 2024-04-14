@@ -8,7 +8,8 @@ namespace Wallpaper.Components
     public partial class GenerativeDownloaderComponent
     {
         [Inject] public IJSRuntime JsRuntime { get; set; } = null!;
-        GenerativeDrawScafolding dummy = new();
+
+        [Parameter] public GenerativeDrawScafolding dummy { get; set; } = new();
         void ButtonClicked()
         {
 

@@ -3,15 +3,17 @@ using SkiaSharp.Views.Blazor;
 using Wallpaper.Models;
 using Wallpaper.Utilities;
 
-namespace Wallpaper.Pages.Generative.Algorithms
+namespace Wallpaper.Algorithms
 {
     public class LinkedLines : IGenerativeDraw
     {
+        public string DownloadPath { get; } = "download/LinkedLines";
         public SKCanvasView CanvasReference { get; set; } = new();
         public float Width { get; set; } = 300;
         public float Height { get; set; } = 300;
+        public int step { get; set; } = 12;
         public Guid Id { get; set; } = Guid.NewGuid();
-        public void ButtonClicked()
+        public async Task ButtonClicked()
         {
             CanvasReference.Invalidate();
         }
@@ -20,7 +22,7 @@ namespace Wallpaper.Pages.Generative.Algorithms
             var canvas = e.Surface.Canvas;
 
             canvas.Clear(SKColor.Parse("#fff"));
-            int step = 12;
+            step = 12;
             Random rand = new(0);
             SKPaint paintR = new() { Color = SKColors.White.WithAlpha(100), IsAntialias = true };
             for (var i = 0; i <= Width; i += step)

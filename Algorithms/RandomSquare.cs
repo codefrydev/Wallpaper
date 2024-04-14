@@ -2,17 +2,19 @@
 using SkiaSharp.Views.Blazor;
 using Wallpaper.Models;
 
-namespace Wallpaper.Pages.Generative.Algorithms
+namespace Wallpaper.Algorithms
 {
     public class RandomSquare : IGenerativeDraw
     {
-
+        public string DownloadPath { get; } = "download/RandomSquare";
         public SKCanvasView CanvasReference { get; set; } = new();
         public float Width { get; set; } = 300;
         public float Height { get; set; } = 300;
+
+        public float z { get; set; } = 12;
         public Guid Id { get; set; } = Guid.NewGuid();
         Random random = new Random();
-        public void ButtonClicked()
+        public async Task ButtonClicked()
         {
             CanvasReference.Invalidate();
         }
@@ -30,7 +32,7 @@ namespace Wallpaper.Pages.Generative.Algorithms
                 Style = SKPaintStyle.Stroke
             };
 
-            float z = 200;
+            z = 200;
             while (z > 10)
             {
                 var x = Width / 2 - random.Next(0, (int)z);

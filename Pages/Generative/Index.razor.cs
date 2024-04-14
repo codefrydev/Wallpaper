@@ -1,10 +1,13 @@
-﻿using Wallpaper.Models;
-using Wallpaper.Pages.Generative.Algorithms;
+﻿using Microsoft.AspNetCore.Components;
+using Wallpaper.Algorithms;
+using Wallpaper.Models;
 
 namespace Wallpaper.Pages.Generative;
 
 public partial class Index
 {
+    [Inject]
+    public NavigationManager navigationManager { get; set; } = null!;
     List<IGenerativeDraw> generativeDraws = [];
     protected override Task OnInitializedAsync()
     {
@@ -15,5 +18,9 @@ public partial class Index
         generativeDraws.Add(new CirclePopulation());
         generativeDraws.Add(new RandomSquare());
         return base.OnInitializedAsync();
+    }
+    void NavigateTo(IGenerativeDraw generativeDraw)
+    {
+        navigationManager.NavigateTo(generativeDraw.DownloadPath);
     }
 }

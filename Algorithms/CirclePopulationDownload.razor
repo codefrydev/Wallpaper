@@ -1,0 +1,79 @@
+﻿@page "/download/CirclePopulation"
+
+@if (circlePopulationRef is not null)
+{
+    <MudStack>
+        <MudItem>
+
+            <MudNumericField @bind-Value="@maxRadius"
+                             Label="Max Raius Of Circle"
+                             Variant="Variant.Outlined"
+                             Min="1"
+                             Max="100000"
+                             Step="1" />
+        </MudItem>
+        <MudItem>
+
+            <MudNumericField @bind-Value="@minRadius"
+                             Label="Min Raius Of Circle"
+                             Variant="Variant.Outlined"
+                             Min="1"
+                             Max="100000"
+                             Step="1" />
+        </MudItem>
+        <MudItem>
+
+            <MudNumericField @bind-Value="@width"
+                             Label="Width Of Image"
+                             Variant="Variant.Outlined"
+                             Min="1"
+                             Max="100000"
+                             Step="1" />
+        </MudItem>
+        <MudItem>
+
+            <MudNumericField @bind-Value="@height"
+                             Label="height Of Image"
+                             Variant="Variant.Outlined"
+                             Min="1"
+                             Max="100000"
+                             Step="1" />
+        </MudItem>
+        <MudItem>
+
+            <MudNumericField @bind-Value="@totalCircle"
+                             Label="Number Of Circle"
+                             Variant="Variant.Outlined"
+                             Min="1"
+                             Max="100000"
+                             Step="1" />
+        </MudItem>
+        <MudItem>
+
+            <MudNumericField @bind-Value="@numberOfAttempts"
+                             Label="Number of Attempts"
+                             Variant="Variant.Outlined"
+                             Min="1"
+                             Max="100000"
+                             Step="1" />
+        </MudItem> 
+        <MudItem> 
+            <MudButton OnClick="Recalculate" FullWidth=true Color="Color.Primary">Generate Again</MudButton>
+        </MudItem>
+        <MudItem> 
+            <MudButton OnClick="DownloadImage" FullWidth=true Color="Color.Success">Download</MudButton>
+        </MudItem>
+        <MudItem>
+
+            <SKCanvasView @ref="circlePopulationRef.CanvasReference"
+                          OnPaintSurface="@circlePopulationRef.OnPaintSurface"
+                          Width="@($"{circlePopulationRef.Width}px")" Height="@($"{circlePopulationRef.Height}px")"
+                          style="@($"height: {circlePopulationRef.Height}px; width: {circlePopulationRef.Width}px;")"
+                          id="@circlePopulationRef.Id" /> 
+        </MudItem>
+    </MudStack>
+}
+else
+{
+    <MudText Typo="Typo.subtitle1">Something is not right/ Or Developer Has Not created Page for this url</MudText>
+}

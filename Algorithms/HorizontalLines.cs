@@ -3,15 +3,19 @@ using SkiaSharp.Views.Blazor;
 using Wallpaper.Models;
 using Wallpaper.Utilities;
 
-namespace Wallpaper.Pages.Generative.Algorithms
+namespace Wallpaper.Algorithms
 {
     public class HorizontalLines : IGenerativeDraw
     {
+        public string DownloadPath { get; } = "download/HorizontalLines";
         public SKCanvasView CanvasReference { get; set; } = new();
         public float Width { get; set; } = 300;
         public float Height { get; set; } = 300;
+
+        public int crowd { get; set; } = 90;
+        public int step { get; set; } = 1;
         public Guid Id { get; set; } = Guid.NewGuid();
-        public void ButtonClicked()
+        public async Task ButtonClicked()
         {
             CanvasReference.Invalidate();
         }
@@ -19,8 +23,8 @@ namespace Wallpaper.Pages.Generative.Algorithms
         public void OnPaintSurface(SKPaintSurfaceEventArgs e)
         {
             var canvas = e.Surface.Canvas;
-            int step = 1;
-            int crowd = 90;
+            step = 1;
+            crowd = 90;
             canvas.Clear(SKColor.Parse("#fff"));
 
             Random rand = new(0);

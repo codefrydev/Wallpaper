@@ -11,12 +11,14 @@ namespace Wallpaper.Utilities
         public float Height { get; set; } = 300;
         public Guid Id { get; set; } = Guid.NewGuid();
 
+        public string DownloadPath => "download/CirclePopulation";
+
         // I am also confused how i came up with this ideas 
         //void IGenerativeDraw.ButtonClicked()
         //{
         //    CanvasReference.Invalidate();
         //}
-        public void ButtonClicked()
+        public async Task ButtonClicked()
         {
             CanvasReference.Invalidate();
         }
