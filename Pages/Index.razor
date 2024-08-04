@@ -1,28 +1,42 @@
 ﻿@page "/"
 <PageTitle>Wallpaper</PageTitle>
-
-<MudPaper Elevation="0" Style="background-color:#e5e9f4"> 
-    @foreach (var mode in modes)
-    {
-        <MudPaper 
-            Class="d-flex justify-center flex-grow-1 pa-5 " 
-            Elevation="0" 
-            Style="background-color:#e5e9f4"
-            @onmouseenter="@(()=>MouseEnter(mode))"
-            @onmouseout="@(()=>MouseExit(mode))">
-            <MudPaper MinWidth="90%"
-                      Height="45vh"
-                      Class="d-flex align-content-center justify-center flex-wrap modeIsHovering"
+<br />
+<br />
+<br />
+<MudContainer Class="center-container">
+    <MudPaper Elevation="0" Style="background-color:#e5e9f4" Class="d-flex flex-wrap gap-4">
+        @foreach (var mode in modes)
+        {
+            <MudPaper Elevation="0"
+                      Style="background-color:#e5e9f4"
+                      @onmouseenter="@(()=>MouseEnter(mode))"
+                      @onmouseout="@(()=>MouseExit(mode))" Width="230px" MaxHeight="300px"
                       @onclick="@(()=>Selected(mode))">
-                        @mode.Name 
+                <MudCard Class="modeIsHovering">
+                    <MudCardMedia Image="images/door.jpg" Height="100" />
+                    <MudCardContent>
+                        <MudText Typo="Typo.h5">@mode.Name</MudText>
+                        <MudText Typo="Typo.body2">@mode.Description</MudText>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Text" Color="Color.Secondary" @onclick="@(()=>Selected(mode))">OPen</MudButton>
+                    </MudCardActions>
+                </MudCard>
             </MudPaper>
-        </MudPaper>
-    }
-</MudPaper> 
+
+
+        }
+    </MudPaper>
+</MudContainer>
 <style>
-    .modeIsHovering:hover
-    {
-        color:lightgreen;
-        background:black;
+    .modeIsHovering:hover {
+        color: lightgreen;
+        background: black;
+    }
+
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>

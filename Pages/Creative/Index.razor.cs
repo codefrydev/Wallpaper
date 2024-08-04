@@ -1,71 +1,24 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using System.Text.Json;
 using Wallpaper.Models;
 
 namespace Wallpaper.Pages.Creative
 {
     public partial class Index
-    {
-        [Inject] public IDialogService dialogService { get; set; } = null!;
-        readonly List<Drawing> images = [];
-        public Index()
+    { 
+        [Inject] public IDialogService dialogService { get; set; } = null!; 
+        protected override async Task OnInitializedAsync()
         {
-            images.Add(new Drawing()
-            {
-                OriginalDrawingUrl = "https://picsum.photos/200/300",
-                ThumbNailUrl = "https://picsum.photos/200/300",
-                Name = "Abhijeet"
-            });
-            images.Add(new Drawing()
-            {
-                OriginalDrawingUrl = "https://picsum.photos/200/300",
-                ThumbNailUrl = "https://picsum.photos/200/300",
-                Name = "Abhijeet"
-            });
-            images.Add(new Drawing()
-            {
-                OriginalDrawingUrl = "https://picsum.photos/200/300",
-                ThumbNailUrl = "https://picsum.photos/200/300",
-                Name = "Abhijeet"
-            });
-            images.Add(new Drawing()
-            {
-                OriginalDrawingUrl = "https://picsum.photos/200/300",
-                ThumbNailUrl = "https://picsum.photos/200/300",
-                Name = "Abhijeet"
-            });
-            images.Add(new Drawing()
-            {
-                OriginalDrawingUrl = "https://picsum.photos/200/300",
-                ThumbNailUrl = "https://picsum.photos/200/300",
-                Name = "Abhijeet"
-            });
-            images.Add(new Drawing()
-            {
-                OriginalDrawingUrl = "https://picsum.photos/200/300",
-                ThumbNailUrl = "https://picsum.photos/200/300",
-                Name = "Abhijeet"
-            });
-            images.Add(new Drawing()
-            {
-                OriginalDrawingUrl = "https://picsum.photos/200/300",
-                ThumbNailUrl = "https://picsum.photos/200/300",
-                Name = "Abhijeet"
-            });
-            images.Add(new Drawing()
-            {
-                OriginalDrawingUrl = "https://picsum.photos/200/300",
-                ThumbNailUrl = "https://picsum.photos/200/300",
-                Name = "Abhijeet"
-            });
-            images.Add(new Drawing()
-            {
-                OriginalDrawingUrl = "https://picsum.photos/200/300",
-                ThumbNailUrl = "https://picsum.photos/200/300",
-                Name = "Abhijeet"
-            });
-
+            Datas.OnChange += StateHasChanged;
+            await Datas.InitializeAsync();
         }
+
+        public void Dispose()
+        {
+            Datas.OnChange -= StateHasChanged;
+        }
+
         private void OpenDialog(Drawing drawing)
         {
             var parameters = new DialogParameters<CreativeImageDialog>
@@ -81,4 +34,7 @@ namespace Wallpaper.Pages.Creative
             dialogService.Show<CreativeImageDialog>(drawing.Name, parameters, options);
         }
     }
+
+
+
 }

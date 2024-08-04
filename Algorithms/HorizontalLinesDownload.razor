@@ -2,8 +2,10 @@
 
 @if (data is not null)
 {
-    <MudStack>
-        <MudItem>
+        <MudPaper Class="d-flex justify-center flex-grow-1 gap-4" Style="background-color:#e5e9f4;" Elevation="0">
+
+            <MudPaper Elevation="0" MaxWidth="600px" Style="background-color:#e5e9f4;">
+         
 
             <MudNumericField @bind-Value="@width"
                              Label="Width Of Image"
@@ -11,16 +13,18 @@
                              Min="1"
                              Max="100000"
                              Step="1" />
-        </MudItem>
-        <MudItem>
+      
 
             <MudNumericField @bind-Value="@height"
                              Label="height Of Image"
                              Variant="Variant.Outlined"
                              Min="1"
                              Max="100000"
-                             Step="1" />
-        </MudItem>
+                             Step="1" /> 
+            </MudPaper>
+        </MudPaper>
+<MudContainer Class="center-container">
+    <MudStack>
         <MudItem>
             <MudButton OnClick="Recalculate" FullWidth=true Color="Color.Primary">Generate Again</MudButton>
         </MudItem>
@@ -35,8 +39,16 @@
                           id="@data.Id" IgnorePixelScaling=true />
         </MudItem>
     </MudStack>
+</MudContainer>
 }
 else
 {
     <MudText Typo="Typo.subtitle1">Something is not right/ Or Developer Has Not created Page for this url</MudText>
 }
+<style>
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>

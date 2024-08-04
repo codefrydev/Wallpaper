@@ -1,0 +1,65 @@
+﻿@page "/download/pointOnCircle"
+
+@if (pointsOnCircle is not null)
+{
+    <MudPaper Class="d-flex justify-center flex-grow-1 gap-4" Style="background-color:#e5e9f4;" Elevation="0">
+
+        <MudPaper Elevation="0" MaxWidth="600px" Style="background-color:#e5e9f4;">
+        <MudNumericField @bind-Value="@height"
+                         Label="Image Height"
+                         Variant="Variant.Outlined"
+                         Min="1"
+                         Max="10000"
+                         Step="1" />
+        <MudNumericField @bind-Value="@width"
+                         Label="Image Width"
+                         Variant="Variant.Outlined"
+                         Min="1"
+                         Max="10000"
+                         Step="1" />
+        <MudNumericField @bind-Value="@radius"
+                         Label="Line Length"
+                         Variant="Variant.Outlined"
+                         Min="30"
+                         Max="1000"
+                         Step="1" />
+        <MudNumericField @bind-Value="@times"
+                         Label="Number of Points"
+                         Variant="Variant.Outlined"
+                         Min="4"
+                         Max="80"
+                         Step="1" />
+    </MudPaper>
+    </MudPaper>
+    <MudContainer Class="center-container">
+        
+        <MudStack>
+
+            <MudItem>
+                <MudButton OnClick="Recalculate" FullWidth=true Color="Color.Primary">Generate Again</MudButton>
+            </MudItem>
+            <MudItem>
+                <MudButton OnClick="DownloadImage" FullWidth=true Color="Color.Success">Download</MudButton>
+            </MudItem>
+            <MudItem>
+
+                <SKCanvasView @ref="pointsOnCircle.CanvasReference"
+                              OnPaintSurface="@pointsOnCircle.OnPaintSurface"
+                              style="@($"height: {pointsOnCircle.Height}px; width: {pointsOnCircle.Width}px;")"
+                              id="@pointsOnCircle.Id" IgnorePixelScaling=true />
+            </MudItem>
+        </MudStack>
+
+    </MudContainer>
+}
+else
+{
+    <MudText Typo="Typo.subtitle1">Something is not right/ Or Developer Has Not created Page for this url</MudText>
+}
+<style>
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>

@@ -1,12 +1,14 @@
 ﻿@page "/Creative"
+@using Models
+@inject Data Datas
 
-<MudPaper Class="d-flex flex-wrap justify-center" Elevation="0">
-    @foreach(var item in images)
+<MudPaper Class="d-flex flex-wrap justify-center" Elevation="0" Style="background-color:#e5e9f4;">
+    @foreach(var item in Datas.VideosData)
     {
         <MudImage 
             Src="@item.ThumbNailUrl" 
-            Width="200" 
-            Height="150" 
+            Width="400" 
+            Height="400" 
             Alt="@item.Description" 
             Elevation="25" 
             Class="rounded-lg ma-2" 

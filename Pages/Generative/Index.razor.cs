@@ -17,6 +17,7 @@ public partial class Index
         generativeDraws.Add(new GridDots());
         generativeDraws.Add(new CirclePopulation());
         generativeDraws.Add(new RandomSquare());
+        generativeDraws.Add(new PointsOnCircle());
         return base.OnInitializedAsync();
     }
     void NavigateTo(IGenerativeDraw generativeDraw)

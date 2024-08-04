@@ -16,12 +16,14 @@ public partial class Index
         modes.Add(new Mode()
         {
             Name = "Creative",
-            Location = "Creative"
+            Location = "Creative",
+            Description ="Hand Drawn Art"
         });
         modes.Add(new Mode()
         {
             Name = "Generative",
-            Location = "Generative"
+            Location = "Generative",
+            Description = "Art but it all algorithm"
         });
         return base.OnInitializedAsync();
     }

@@ -1,43 +1,56 @@
-﻿@page "/download/GridDots" 
+﻿@page "/download/GridDots"
 
 
 @if (data is not null)
 {
-    <MudStack> 
-        <MudItem>
+    <MudPaper Class="d-flex justify-center flex-grow-1 gap-4" Style="background-color:#e5e9f4;" Elevation="0">
 
-            <MudNumericField @bind-Value="@width"
-                             Label="Width Of Image"
-                             Variant="Variant.Outlined"
-                             Min="1"
-                             Max="100000"
-                             Step="1" />
-        </MudItem>
-        <MudItem>
+        <MudPaper Elevation="0" MaxWidth="600px" Style="background-color:#e5e9f4;">
+             
 
-            <MudNumericField @bind-Value="@height"
-                             Label="height Of Image"
-                             Variant="Variant.Outlined"
-                             Min="1"
-                             Max="100000"
-                             Step="1" />
-        </MudItem> 
-        <MudItem>
-            <MudButton OnClick="Recalculate" FullWidth=true Color="Color.Primary">Generate Again</MudButton>
-        </MudItem>
-        <MudItem>
-            <MudButton OnClick="DownloadImage" FullWidth=true Color="Color.Success">Download</MudButton>
-        </MudItem>
-        <MudItem>
+                <MudNumericField @bind-Value="@width"
+                                 Label="Width Of Image"
+                                 Variant="Variant.Outlined"
+                                 Min="1"
+                                 Max="100000"
+                                 Step="1" />
+             
 
-            <SKCanvasView @ref="data.CanvasReference"
-                          OnPaintSurface="@data.OnPaintSurface"
-                          style="@($"height: {data.Height}px; width: {data.Width}px;")"
-                          id="@data.Id" IgnorePixelScaling=true />
-        </MudItem>
-    </MudStack>
+                <MudNumericField @bind-Value="@height"
+                                 Label="height Of Image"
+                                 Variant="Variant.Outlined"
+                                 Min="1"
+                                 Max="100000"
+                                 Step="1" /> 
+        </MudPaper>
+    </MudPaper>
+    <MudContainer Class="center-container">
+        <MudStack>
+
+            <MudItem>
+                <MudButton OnClick="Recalculate" FullWidth=true Color="Color.Primary">Generate Again</MudButton>
+            </MudItem>
+            <MudItem>
+                <MudButton OnClick="DownloadImage" FullWidth=true Color="Color.Success">Download</MudButton>
+            </MudItem>
+            <MudItem>
+
+                <SKCanvasView @ref="data.CanvasReference"
+                              OnPaintSurface="@data.OnPaintSurface"
+                              style="@($"height: {data.Height}px; width: {data.Width}px;")"
+                              id="@data.Id" IgnorePixelScaling=true />
+            </MudItem>
+        </MudStack>
+    </MudContainer>
 }
 else
 {
     <MudText Typo="Typo.subtitle1">Something is not right/ Or Developer Has Not created Page for this url</MudText>
 }
+<style>
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
