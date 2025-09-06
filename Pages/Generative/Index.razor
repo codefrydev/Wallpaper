@@ -1,124 +1,85 @@
 ﻿@page "/Generative"
 <PageTitle>Generative Art - Wallpaper Generator</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Header Section -->
-    <MudPaper Elevation="0" Class="header-section pa-6 mb-8">
-        <MudStack AlignItems="AlignItems.Center" Spacing="3">
-            <MudIcon Icon="Icons.Material.Filled.AutoAwesome" Size="Size.Large" Color="Color.Primary" Style="font-size: 3rem;" />
-            <MudText Typo="Typo.h3" Class="text-center" Style="background: linear-gradient(135deg, #6366f1, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+    <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-2xl border border-slate-200 p-8 mb-8">
+        <div class="text-center space-y-4">
+            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <h1 class="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 Generative Art Gallery
-            </MudText>
-            <MudText Typo="Typo.body1" Class="text-center" Style="color: #64748b; max-width: 600px;">
+            </h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
                 Click on any pattern to customize and download your unique wallpaper
-            </MudText>
-        </MudStack>
-    </MudPaper>
+            </p>
+        </div>
+    </div>
 
     <!-- Art Gallery Grid -->
-    <MudGrid>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
         @foreach (var item in generativeDraws)
         {
-            <MudItem xs="12" sm="6" md="4" lg="3">
-                <MudPaper 
-                    Elevation="8" 
-                    Class="art-card pa-4"
-                    @onclick="@(()=>NavigateTo(item))">
-                    <MudStack AlignItems="AlignItems.Center" Spacing="3">
-                        <MudPaper 
-                            Elevation="4" 
-                            Class="canvas-container"
-                            Style="border-radius: 12px; overflow: hidden; border: 2px solid #e2e8f0;">
+            <div class="group cursor-pointer" @onclick="@(()=>NavigateTo(item))">
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-primary">
+                    <div class="text-center space-y-4">
+                        <div class="bg-slate-50 rounded-xl p-4 border-2 border-slate-200 group-hover:border-primary group-hover:shadow-lg transition-all duration-300">
                             <SKCanvasView 
                                 @ref="item.CanvasReference"
                                 OnPaintSurface="@item.OnPaintSurface"
-                                style="@($"height: {item.Height}px; width: {item.Width}px; border-radius: 10px;")"
+                                style="@($"height: {item.Height}px; width: {item.Width}px; border-radius: 8px;")"
                                 @onclick="@(()=>NavigateTo(item))" 
                                 id="@item.Id" 
                                 IgnorePixelScaling="true" />
-                        </MudPaper>
-                        <MudText Typo="Typo.h6" Class="text-center">@item.GetType().Name</MudText>
-                        <MudText Typo="Typo.body2" Class="text-center" Style="color: #64748b;">
-                            Algorithmic pattern generation
-                        </MudText>
-                        <MudButton 
-                            Variant="Variant.Filled" 
-                            Color="Color.Primary" 
-                            Size="Size.Small"
-                            StartIcon="Icons.Material.Filled.Download"
-                            @onclick="@(()=>NavigateTo(item))">
-                            Customize & Download
-                        </MudButton>
-                    </MudStack>
-                </MudPaper>
-            </MudItem>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-800">@item.GetType().Name</h3>
+                        <p class="text-slate-600 text-sm">Algorithmic pattern generation</p>
+                        <button class="w-full bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 rounded-lg font-medium hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <span>Customize & Download</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         }
-    </MudGrid>
+    </div>
 
     <!-- Info Section -->
-    <MudPaper Elevation="0" Class="info-section pa-6 mt-12">
-        <MudStack AlignItems="AlignItems.Center" Spacing="4">
-            <MudText Typo="Typo.h5" Class="text-center">How It Works</MudText>
-            <MudGrid>
-                <MudItem xs="12" sm="4">
-                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
-                        <MudIcon Icon="Icons.Material.Filled.Science" Size="Size.Large" Color="Color.Primary" />
-                        <MudText Typo="Typo.h6" Class="text-center">Algorithm</MudText>
-                        <MudText Typo="Typo.body2" Class="text-center">Mathematical algorithms generate unique patterns</MudText>
-                    </MudStack>
-                </MudItem>
-                <MudItem xs="12" sm="4">
-                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
-                        <MudIcon Icon="Icons.Material.Filled.Tune" Size="Size.Large" Color="Color.Secondary" />
-                        <MudText Typo="Typo.h6" Class="text-center">Customize</MudText>
-                        <MudText Typo="Typo.body2" Class="text-center">Adjust colors, size, and parameters</MudText>
-                    </MudStack>
-                </MudItem>
-                <MudItem xs="12" sm="4">
-                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
-                        <MudIcon Icon="Icons.Material.Filled.HighQuality" Size="Size.Large" Color="Color.Tertiary" />
-                        <MudText Typo="Typo.h6" Class="text-center">Download</MudText>
-                        <MudText Typo="Typo.body2" Class="text-center">Get high-resolution wallpapers instantly</MudText>
-                    </MudStack>
-                </MudItem>
-            </MudGrid>
-        </MudStack>
-    </MudPaper>
-</MudContainer>
-
-<style>
-    .header-section {
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        border-radius: 16px;
-        border: 1px solid #e2e8f0;
-    }
-
-    .art-card {
-        border-radius: 16px;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        border: 1px solid #e2e8f0;
-        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    }
-
-    .art-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1) !important;
-        border-color: #6366f1;
-    }
-
-    .canvas-container {
-        transition: all 0.3s ease;
-    }
-
-    .art-card:hover .canvas-container {
-        border-color: #6366f1;
-        box-shadow: 0 8px 16px rgba(99, 102, 241, 0.2);
-    }
-
-    .info-section {
-        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-        border-radius: 16px;
-        border: 1px solid #e2e8f0;
-    }
-</style>
+    <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-2xl border border-slate-200 p-8">
+        <h2 class="text-3xl font-bold text-center text-slate-800 mb-8">How It Works</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center space-y-4">
+                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M9 12l2 2 4-4a2 2 0 00-2.828-2.828L9 10.172 7.414 8.586a2 2 0 00-2.828 2.828L9 12z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-800">Algorithm</h3>
+                <p class="text-slate-600">Mathematical algorithms generate unique patterns</p>
+            </div>
+            <div class="text-center space-y-4">
+                <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-800">Customize</h3>
+                <p class="text-slate-600">Adjust colors, size, and parameters</p>
+            </div>
+            <div class="text-center space-y-4">
+                <div class="w-16 h-16 bg-tertiary rounded-full flex items-center justify-center mx-auto">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-800">Download</h3>
+                <p class="text-slate-600">Get high-resolution wallpapers instantly</p>
+            </div>
+        </div>
+    </div>
+</div>

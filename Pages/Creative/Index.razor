@@ -3,133 +3,83 @@
 @inject Data Datas
 <PageTitle>Creative Art - Wallpaper Generator</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Header Section -->
-    <MudPaper Elevation="0" Class="header-section pa-6 mb-8">
-        <MudStack AlignItems="AlignItems.Center" Spacing="3">
-            <MudIcon Icon="Icons.Material.Filled.Palette" Size="Size.Large" Color="Color.Secondary" Style="font-size: 3rem;" />
-            <MudText Typo="Typo.h3" Class="text-center" Style="background: linear-gradient(135deg, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+    <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-2xl border border-slate-200 p-8 mb-8">
+        <div class="text-center space-y-4">
+            <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <h1 class="text-4xl font-bold bg-gradient-to-r from-secondary to-pink-500 bg-clip-text text-transparent">
                 Creative Art Gallery
-            </MudText>
-            <MudText Typo="Typo.body1" Class="text-center" Style="color: #64748b; max-width: 600px;">
+            </h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
                 Discover hand-drawn artistic wallpapers created by talented artists
-            </MudText>
-        </MudStack>
-    </MudPaper>
+            </p>
+        </div>
+    </div>
 
     <!-- Art Gallery Grid -->
-    <MudGrid>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
         @foreach(var item in Datas.VideosData)
         {
-            <MudItem xs="12" sm="6" md="4" lg="3">
-                <MudPaper 
-                    Elevation="8" 
-                    Class="art-card pa-4"
-                    @onclick="@(()=>OpenDialog(item))">
-                    <MudStack AlignItems="AlignItems.Center" Spacing="3">
-                        <MudPaper 
-                            Elevation="4" 
-                            Class="image-container"
-                            Style="border-radius: 12px; overflow: hidden; border: 2px solid #e2e8f0;">
-                            <MudImage 
-                                Src="@item.ThumbNailUrl" 
-                                Width="300" 
-                                Height="300" 
-                                Alt="@item.Description" 
-                                Class="art-image" 
-                                @onclick="@(()=>OpenDialog(item))" />
-                        </MudPaper>
-                        <MudText Typo="Typo.h6" Class="text-center">@item.Name</MudText>
-                        <MudText Typo="Typo.body2" Class="text-center" Style="color: #64748b;">
-                            @item.Description
-                        </MudText>
-                        <MudButton 
-                            Variant="Variant.Filled" 
-                            Color="Color.Secondary" 
-                            Size="Size.Small"
-                            StartIcon="Icons.Material.Filled.Visibility"
-                            @onclick="@(()=>OpenDialog(item))">
-                            View & Download
-                        </MudButton>
-                    </MudStack>
-                </MudPaper>
-            </MudItem>
+            <div class="group cursor-pointer" @onclick="@(()=>OpenDialog(item))">
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-secondary">
+                    <div class="text-center space-y-4">
+                        <div class="bg-slate-50 rounded-xl p-4 border-2 border-slate-200 group-hover:border-secondary group-hover:shadow-lg transition-all duration-300 overflow-hidden">
+                            <img 
+                                src="@item.ThumbNailUrl" 
+                                alt="@item.Description" 
+                                class="w-full h-64 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" />
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-800">@item.Name</h3>
+                        <p class="text-slate-600 text-sm">@item.Description</p>
+                        <button class="w-full bg-gradient-to-r from-secondary to-pink-500 text-white py-2 px-4 rounded-lg font-medium hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            <span>View & Download</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         }
-    </MudGrid>
+    </div>
 
     <!-- Info Section -->
-    <MudPaper Elevation="0" Class="info-section pa-6 mt-12">
-        <MudStack AlignItems="AlignItems.Center" Spacing="4">
-            <MudText Typo="Typo.h5" Class="text-center">About Creative Art</MudText>
-            <MudGrid>
-                <MudItem xs="12" sm="4">
-                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
-                        <MudIcon Icon="Icons.Material.Filled.Brush" Size="Size.Large" Color="Color.Secondary" />
-                        <MudText Typo="Typo.h6" Class="text-center">Hand-Drawn</MudText>
-                        <MudText Typo="Typo.body2" Class="text-center">Original artwork created by talented artists</MudText>
-                    </MudStack>
-                </MudItem>
-                <MudItem xs="12" sm="4">
-                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
-                        <MudIcon Icon="Icons.Material.Filled.Star" Size="Size.Large" Color="Color.Warning" />
-                        <MudText Typo="Typo.h6" Class="text-center">Curated</MudText>
-                        <MudText Typo="Typo.body2" Class="text-center">Carefully selected high-quality pieces</MudText>
-                    </MudStack>
-                </MudItem>
-                <MudItem xs="12" sm="4">
-                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
-                        <MudIcon Icon="Icons.Material.Filled.HighQuality" Size="Size.Large" Color="Color.Tertiary" />
-                        <MudText Typo="Typo.h6" Class="text-center">High Resolution</MudText>
-                        <MudText Typo="Typo.body2" Class="text-center">Perfect for any screen size and device</MudText>
-                    </MudStack>
-                </MudItem>
-            </MudGrid>
-        </MudStack>
-    </MudPaper>
-</MudContainer>
-
-<style>
-    .header-section {
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        border-radius: 16px;
-        border: 1px solid #e2e8f0;
-    }
-
-    .art-card {
-        border-radius: 16px;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        border: 1px solid #e2e8f0;
-        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    }
-
-    .art-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1) !important;
-        border-color: #8b5cf6;
-    }
-
-    .image-container {
-        transition: all 0.3s ease;
-    }
-
-    .art-card:hover .image-container {
-        border-color: #8b5cf6;
-        box-shadow: 0 8px 16px rgba(139, 92, 246, 0.2);
-    }
-
-    .art-image {
-        transition: all 0.3s ease;
-        border-radius: 10px;
-    }
-
-    .art-card:hover .art-image {
-        transform: scale(1.05);
-    }
-
-    .info-section {
-        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-        border-radius: 16px;
-        border: 1px solid #e2e8f0;
-    }
-</style>
+    <div class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-2xl border border-slate-200 p-8">
+        <h2 class="text-3xl font-bold text-center text-slate-800 mb-8">About Creative Art</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center space-y-4">
+                <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-800">Hand-Drawn</h3>
+                <p class="text-slate-600">Original artwork created by talented artists</p>
+            </div>
+            <div class="text-center space-y-4">
+                <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-800">Curated</h3>
+                <p class="text-slate-600">Carefully selected high-quality pieces</p>
+            </div>
+            <div class="text-center space-y-4">
+                <div class="w-16 h-16 bg-tertiary rounded-full flex items-center justify-center mx-auto">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-800">High Resolution</h3>
+                <p class="text-slate-600">Perfect for any screen size and device</p>
+            </div>
+        </div>
+    </div>
+</div>
