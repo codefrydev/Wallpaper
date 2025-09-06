@@ -1,17 +1,135 @@
 ﻿@page "/Creative"
 @using Models
 @inject Data Datas
+<PageTitle>Creative Art - Wallpaper Generator</PageTitle>
 
-<MudPaper Class="d-flex flex-wrap justify-center" Elevation="0" Style="background-color:#e5e9f4;">
-    @foreach(var item in Datas.VideosData)
-    {
-        <MudImage 
-            Src="@item.ThumbNailUrl" 
-            Width="400" 
-            Height="400" 
-            Alt="@item.Description" 
-            Elevation="25" 
-            Class="rounded-lg ma-2" 
-            @onclick="@(()=>OpenDialog(item))" />
+<MudContainer MaxWidth="MaxWidth.Large" Class="py-8">
+    <!-- Header Section -->
+    <MudPaper Elevation="0" Class="header-section pa-6 mb-8">
+        <MudStack AlignItems="AlignItems.Center" Spacing="3">
+            <MudIcon Icon="Icons.Material.Filled.Palette" Size="Size.Large" Color="Color.Secondary" Style="font-size: 3rem;" />
+            <MudText Typo="Typo.h3" Class="text-center" Style="background: linear-gradient(135deg, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                Creative Art Gallery
+            </MudText>
+            <MudText Typo="Typo.body1" Class="text-center" Style="color: #64748b; max-width: 600px;">
+                Discover hand-drawn artistic wallpapers created by talented artists
+            </MudText>
+        </MudStack>
+    </MudPaper>
+
+    <!-- Art Gallery Grid -->
+    <MudGrid>
+        @foreach(var item in Datas.VideosData)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper 
+                    Elevation="8" 
+                    Class="art-card pa-4"
+                    @onclick="@(()=>OpenDialog(item))">
+                    <MudStack AlignItems="AlignItems.Center" Spacing="3">
+                        <MudPaper 
+                            Elevation="4" 
+                            Class="image-container"
+                            Style="border-radius: 12px; overflow: hidden; border: 2px solid #e2e8f0;">
+                            <MudImage 
+                                Src="@item.ThumbNailUrl" 
+                                Width="300" 
+                                Height="300" 
+                                Alt="@item.Description" 
+                                Class="art-image" 
+                                @onclick="@(()=>OpenDialog(item))" />
+                        </MudPaper>
+                        <MudText Typo="Typo.h6" Class="text-center">@item.Name</MudText>
+                        <MudText Typo="Typo.body2" Class="text-center" Style="color: #64748b;">
+                            @item.Description
+                        </MudText>
+                        <MudButton 
+                            Variant="Variant.Filled" 
+                            Color="Color.Secondary" 
+                            Size="Size.Small"
+                            StartIcon="Icons.Material.Filled.Visibility"
+                            @onclick="@(()=>OpenDialog(item))">
+                            View & Download
+                        </MudButton>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+        }
+    </MudGrid>
+
+    <!-- Info Section -->
+    <MudPaper Elevation="0" Class="info-section pa-6 mt-12">
+        <MudStack AlignItems="AlignItems.Center" Spacing="4">
+            <MudText Typo="Typo.h5" Class="text-center">About Creative Art</MudText>
+            <MudGrid>
+                <MudItem xs="12" sm="4">
+                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
+                        <MudIcon Icon="Icons.Material.Filled.Brush" Size="Size.Large" Color="Color.Secondary" />
+                        <MudText Typo="Typo.h6" Class="text-center">Hand-Drawn</MudText>
+                        <MudText Typo="Typo.body2" Class="text-center">Original artwork created by talented artists</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4">
+                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
+                        <MudIcon Icon="Icons.Material.Filled.Star" Size="Size.Large" Color="Color.Warning" />
+                        <MudText Typo="Typo.h6" Class="text-center">Curated</MudText>
+                        <MudText Typo="Typo.body2" Class="text-center">Carefully selected high-quality pieces</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4">
+                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
+                        <MudIcon Icon="Icons.Material.Filled.HighQuality" Size="Size.Large" Color="Color.Tertiary" />
+                        <MudText Typo="Typo.h6" Class="text-center">High Resolution</MudText>
+                        <MudText Typo="Typo.body2" Class="text-center">Perfect for any screen size and device</MudText>
+                    </MudStack>
+                </MudItem>
+            </MudGrid>
+        </MudStack>
+    </MudPaper>
+</MudContainer>
+
+<style>
+    .header-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
     }
-</MudPaper>
+
+    .art-card {
+        border-radius: 16px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 1px solid #e2e8f0;
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .art-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1) !important;
+        border-color: #8b5cf6;
+    }
+
+    .image-container {
+        transition: all 0.3s ease;
+    }
+
+    .art-card:hover .image-container {
+        border-color: #8b5cf6;
+        box-shadow: 0 8px 16px rgba(139, 92, 246, 0.2);
+    }
+
+    .art-image {
+        transition: all 0.3s ease;
+        border-radius: 10px;
+    }
+
+    .art-card:hover .art-image {
+        transform: scale(1.05);
+    }
+
+    .info-section {
+        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+    }
+</style>

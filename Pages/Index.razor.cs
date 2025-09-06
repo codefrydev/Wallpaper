@@ -7,9 +7,8 @@ public partial class Index
 {
     [Inject] public NavigationManager Manager { get; set; } = null!;
 
-    readonly string creativeColor = $"color:{(new MudTheme()).Palette.Dark}; background:{(new MudTheme()).Palette.Warning};";
-    readonly string generativeColor = $"color:{(new MudTheme()).Palette.SuccessLighten}; background:{(new MudTheme()).Palette.Dark};";
     readonly List<Mode> modes = [];
+    
     protected override Task OnInitializedAsync()
     {
         modes.Clear();
@@ -17,28 +16,42 @@ public partial class Index
         {
             Name = "Creative",
             Location = "Creative",
-            Description ="Hand Drawn Art"
+            Description = "Hand-drawn artistic wallpapers",
+            Icon = "Icons.Material.Filled.Palette",
+            ModeStyle = ""
         });
         modes.Add(new Mode()
         {
             Name = "Generative",
             Location = "Generative",
-            Description = "Art but it all algorithm"
+            Description = "Algorithm-generated patterns",
+            Icon = "Icons.Material.Filled.AutoAwesome",
+            ModeStyle = ""
         });
         return base.OnInitializedAsync();
     }
+    
     void Selected(Mode mode)
     {
         Manager.NavigateTo(mode.Location);
     }
+    
     void MouseEnter(Mode mode)
     {
-        mode.ModeStyle = creativeColor;
+        if (mode.Name == "Creative")
+        {
+            mode.ModeStyle = "background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-color: #f59e0b;";
+        }
+        else
+        {
+            mode.ModeStyle = "background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-color: #3b82f6;";
+        }
         StateHasChanged();
     }
+    
     void MouseExit(Mode mode)
     {
-        mode.ModeStyle = generativeColor;
+        mode.ModeStyle = "";
         StateHasChanged();
     }
 
@@ -47,7 +60,7 @@ public partial class Index
         public string Name { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
-        public string BackgroundColor { get; set; }
+        public string Icon { get; set; }
         public string ModeStyle { get; set; }
     }
 }

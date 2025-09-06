@@ -1,19 +1,124 @@
 ﻿@page "/Generative"
+<PageTitle>Generative Art - Wallpaper Generator</PageTitle>
 
+<MudContainer MaxWidth="MaxWidth.Large" Class="py-8">
+    <!-- Header Section -->
+    <MudPaper Elevation="0" Class="header-section pa-6 mb-8">
+        <MudStack AlignItems="AlignItems.Center" Spacing="3">
+            <MudIcon Icon="Icons.Material.Filled.AutoAwesome" Size="Size.Large" Color="Color.Primary" Style="font-size: 3rem;" />
+            <MudText Typo="Typo.h3" Class="text-center" Style="background: linear-gradient(135deg, #6366f1, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                Generative Art Gallery
+            </MudText>
+            <MudText Typo="Typo.body1" Class="text-center" Style="color: #64748b; max-width: 600px;">
+                Click on any pattern to customize and download your unique wallpaper
+            </MudText>
+        </MudStack>
+    </MudPaper>
 
-<MudPaper 
-    Class="d-flex flex-wrap justify-center"
-    Elevation="0" 
-    Style="background-color:#e5e9f4">
-    @foreach (var item in generativeDraws)
-    {
-        <MudPaper Class="d-flex justify-center ma-2">
-            <SKCanvasView 
-                @ref="item.CanvasReference"
-                OnPaintSurface="@item.OnPaintSurface"
-                style="@($"height: {item.Height}px; width: {item.Width}px;")"
-                @onclick="@(()=>NavigateTo(item))" 
-                id="@item.Id" IgnorePixelScaling=true />
-        </MudPaper>
+    <!-- Art Gallery Grid -->
+    <MudGrid>
+        @foreach (var item in generativeDraws)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudPaper 
+                    Elevation="8" 
+                    Class="art-card pa-4"
+                    @onclick="@(()=>NavigateTo(item))">
+                    <MudStack AlignItems="AlignItems.Center" Spacing="3">
+                        <MudPaper 
+                            Elevation="4" 
+                            Class="canvas-container"
+                            Style="border-radius: 12px; overflow: hidden; border: 2px solid #e2e8f0;">
+                            <SKCanvasView 
+                                @ref="item.CanvasReference"
+                                OnPaintSurface="@item.OnPaintSurface"
+                                style="@($"height: {item.Height}px; width: {item.Width}px; border-radius: 10px;")"
+                                @onclick="@(()=>NavigateTo(item))" 
+                                id="@item.Id" 
+                                IgnorePixelScaling="true" />
+                        </MudPaper>
+                        <MudText Typo="Typo.h6" Class="text-center">@item.GetType().Name</MudText>
+                        <MudText Typo="Typo.body2" Class="text-center" Style="color: #64748b;">
+                            Algorithmic pattern generation
+                        </MudText>
+                        <MudButton 
+                            Variant="Variant.Filled" 
+                            Color="Color.Primary" 
+                            Size="Size.Small"
+                            StartIcon="Icons.Material.Filled.Download"
+                            @onclick="@(()=>NavigateTo(item))">
+                            Customize & Download
+                        </MudButton>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+        }
+    </MudGrid>
+
+    <!-- Info Section -->
+    <MudPaper Elevation="0" Class="info-section pa-6 mt-12">
+        <MudStack AlignItems="AlignItems.Center" Spacing="4">
+            <MudText Typo="Typo.h5" Class="text-center">How It Works</MudText>
+            <MudGrid>
+                <MudItem xs="12" sm="4">
+                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
+                        <MudIcon Icon="Icons.Material.Filled.Science" Size="Size.Large" Color="Color.Primary" />
+                        <MudText Typo="Typo.h6" Class="text-center">Algorithm</MudText>
+                        <MudText Typo="Typo.body2" Class="text-center">Mathematical algorithms generate unique patterns</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4">
+                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
+                        <MudIcon Icon="Icons.Material.Filled.Tune" Size="Size.Large" Color="Color.Secondary" />
+                        <MudText Typo="Typo.h6" Class="text-center">Customize</MudText>
+                        <MudText Typo="Typo.body2" Class="text-center">Adjust colors, size, and parameters</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4">
+                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
+                        <MudIcon Icon="Icons.Material.Filled.HighQuality" Size="Size.Large" Color="Color.Tertiary" />
+                        <MudText Typo="Typo.h6" Class="text-center">Download</MudText>
+                        <MudText Typo="Typo.body2" Class="text-center">Get high-resolution wallpapers instantly</MudText>
+                    </MudStack>
+                </MudItem>
+            </MudGrid>
+        </MudStack>
+    </MudPaper>
+</MudContainer>
+
+<style>
+    .header-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
     }
-</MudPaper>
+
+    .art-card {
+        border-radius: 16px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 1px solid #e2e8f0;
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .art-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1) !important;
+        border-color: #6366f1;
+    }
+
+    .canvas-container {
+        transition: all 0.3s ease;
+    }
+
+    .art-card:hover .canvas-container {
+        border-color: #6366f1;
+        box-shadow: 0 8px 16px rgba(99, 102, 241, 0.2);
+    }
+
+    .info-section {
+        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+    }
+</style>
