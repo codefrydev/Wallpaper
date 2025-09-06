@@ -9,36 +9,36 @@
                 <!-- Logo -->
                 <div class="flex items-center space-x-3 cursor-pointer" @onclick="@(() => Navigation.NavigateTo("/"))">
                     <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <i data-lucide="palette" class="w-6 h-6 text-white"></i>
+                        <i class="fas fa-palette w-6 h-6 text-white"></i>
                     </div>
                     <div>
                         <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                             Wallpaper Studio
                         </h1>
-                        <p class="text-xs text-slate-500 -mt-1">AI Art Generator</p>
+                        <p class="text-xs text-slate-500 -mt-1">Algorithmic Art Generator</p>
                     </div>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="/" class="nav-link @(GetActiveClass("/"))">
-                        <i data-lucide="home" class="w-4 h-4"></i>
-                        <span>Home</span>
-                    </a>
-                    <a href="/Generative" class="nav-link @(GetActiveClass("/Generative"))">
-                        <i data-lucide="sparkles" class="w-4 h-4"></i>
-                        <span>Generative</span>
-                    </a>
-                    <a href="/Creative" class="nav-link @(GetActiveClass("/Creative"))">
-                        <i data-lucide="image" class="w-4 h-4"></i>
-                        <span>Creative</span>
-                    </a>
+        <a href="/" class="nav-link @(GetActiveClass("/"))">
+            <i class="fas fa-home w-4 h-4"></i>
+            <span>Home</span>
+        </a>
+        <a href="/Generative" class="nav-link @(GetActiveClass("/Generative"))">
+            <i class="fas fa-magic w-4 h-4"></i>
+            <span>Generative</span>
+        </a>
+        <a href="/Creative" class="nav-link @(GetActiveClass("/Creative"))">
+            <i class="fas fa-image w-4 h-4"></i>
+            <span>Creative</span>
+        </a>
                 </div>
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden">
                     <button class="mobile-menu-btn p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
+                        <i class="fas fa-bars w-6 h-6"></i>
                     </button>
                 </div>
             </div>
@@ -48,15 +48,15 @@
         <div class="mobile-menu hidden md:hidden bg-white/95 backdrop-blur-md border-t border-slate-200/50">
             <div class="px-4 py-2 space-y-1">
                 <a href="/" class="mobile-nav-link @(GetActiveClass("/"))">
-                    <i data-lucide="home" class="w-5 h-5"></i>
+                    <i class="fas fa-home w-5 h-5"></i>
                     <span>Home</span>
                 </a>
                 <a href="/Generative" class="mobile-nav-link @(GetActiveClass("/Generative"))">
-                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    <i class="fas fa-magic w-5 h-5"></i>
                     <span>Generative Art</span>
                 </a>
                 <a href="/Creative" class="mobile-nav-link @(GetActiveClass("/Creative"))">
-                    <i data-lucide="image" class="w-5 h-5"></i>
+                    <i class="fas fa-image w-5 h-5"></i>
                     <span>Creative Art</span>
                 </a>
             </div>
@@ -71,7 +71,7 @@
     <!-- Floating Action Button -->
     <div class="fixed bottom-6 right-6 z-40">
         <button class="fab-btn group" @onclick="@(() => Navigation.NavigateTo("/"))" title="Back to Home">
-            <i data-lucide="home" class="w-6 h-6 transition-transform group-hover:scale-110"></i>
+            <i class="fas fa-home w-6 h-6 transition-transform group-hover:scale-110"></i>
         </button>
     </div>
 </div>
