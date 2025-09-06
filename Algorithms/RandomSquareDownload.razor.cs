@@ -19,7 +19,7 @@ namespace Wallpaper.Algorithms
         [Inject] public IJSRuntime JsRuntime { get; set; } = null!;
 
         [Parameter] public GenerativeDrawScafolding dummy { get; set; } = new();
-        async Task Recalculate()
+        async Task GenerateImage()
         {
             data.Width = width;
             data.Height = height;

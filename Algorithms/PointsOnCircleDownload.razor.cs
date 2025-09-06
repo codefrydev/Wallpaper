@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using MudBlazor;
 using Wallpaper.Utilities;
 
 namespace Wallpaper.Algorithms
@@ -21,7 +20,7 @@ namespace Wallpaper.Algorithms
             pointsOnCircle.Times = times;
 
         }
-        async Task Recalculate()
+        async Task GenerateImage()
         {
             pointsOnCircle.Radius = radius;
             pointsOnCircle.Height = height;

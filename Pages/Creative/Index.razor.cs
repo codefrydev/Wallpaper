@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MudBlazor;
 using System.Text.Json;
 using Wallpaper.Models;
 
@@ -7,7 +6,6 @@ namespace Wallpaper.Pages.Creative
 {
     public partial class Index
     { 
-        [Inject] public IDialogService dialogService { get; set; } = null!; 
         protected override async Task OnInitializedAsync()
         {
             Datas.OnChange += StateHasChanged;
@@ -19,22 +17,21 @@ namespace Wallpaper.Pages.Creative
             Datas.OnChange -= StateHasChanged;
         }
 
+        private Drawing? selectedImage = null;
+        private bool showModal = false;
+
         private void OpenDialog(Drawing drawing)
         {
-            var parameters = new DialogParameters<CreativeImageDialog>
-            {
-                { x => x.ImageToDownload, drawing }
-            };
-            var options = new DialogOptions
-            {
-                CloseOnEscapeKey = true,
-                CloseButton = true,
-                //Position = DialogPosition.Center
-            };
-            dialogService.Show<CreativeImageDialog>(drawing.Name, parameters, options);
+            selectedImage = drawing;
+            showModal = true;
+            StateHasChanged();
+        }
+
+        private void CloseModal()
+        {
+            showModal = false;
+            selectedImage = null;
+            StateHasChanged();
         }
     }
-
-
-
 }

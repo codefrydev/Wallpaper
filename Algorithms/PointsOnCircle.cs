@@ -1,7 +1,6 @@
 ﻿using SkiaSharp;
 using SkiaSharp.Views.Blazor;
 using Wallpaper.Models;
-using static MudBlazor.CategoryTypes;
 
 namespace Wallpaper.Algorithms
 {

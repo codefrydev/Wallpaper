@@ -1,54 +1,84 @@
 ﻿@page "/download/LinkedLines"
 @if (data is not null)
 {
-    <MudPaper Class="d-flex justify-center flex-grow-1 gap-4" Style="background-color:#e5e9f4;" Elevation="0">
+    <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold gradient-text mb-4">Linked Lines Generator</h1>
+                <p class="text-xl text-slate-600">Customize your algorithmic art and download high-resolution wallpapers</p>
+            </div>
 
-        <MudPaper Elevation="0" MaxWidth="600px" Style="background-color:#e5e9f4;">
-             
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Controls Panel -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-6">Customize Parameters</h2>
+                    
+                    <div class="space-y-6">
+                        <!-- Width Input -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Width of Image</label>
+                            <input type="number" 
+                                   @bind="width" 
+                                   min="1" 
+                                   max="100000" 
+                                   step="1"
+                                   class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors" />
+                        </div>
 
-                <MudNumericField @bind-Value="@width"
-                                 Label="Width Of Image"
-                                 Variant="Variant.Outlined"
-                                 Min="1"
-                                 Max="100000"
-                                 Step="1" />
-             
+                        <!-- Height Input -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Height of Image</label>
+                            <input type="number" 
+                                   @bind="height" 
+                                   min="1" 
+                                   max="100000" 
+                                   step="1"
+                                   class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors" />
+                        </div>
 
-                <MudNumericField @bind-Value="@height"
-                                 Label="height Of Image"
-                                 Variant="Variant.Outlined"
-                                 Min="1"
-                                 Max="100000"
-                                 Step="1" />
-             
-        </MudPaper>
-    </MudPaper>
-    <MudContainer Class="center-container">
-        <MudStack>
-            <MudItem>
-                <MudButton OnClick="Recalculate" FullWidth=true Color="Color.Primary">Generate Again</MudButton>
-            </MudItem>
-            <MudItem>
-                <MudButton OnClick="DownloadImage" FullWidth=true Color="Color.Success">Download</MudButton>
-            </MudItem>
-            <MudItem>
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button @onclick="GenerateImage" 
+                                    class="flex-1 btn-primary flex items-center justify-center space-x-2 py-3">
+                                <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                                <span>Generate Image</span>
+                            </button>
+                            <button @onclick="DownloadImage" 
+                                    class="flex-1 btn-secondary flex items-center justify-center space-x-2 py-3">
+                                <i data-lucide="download" class="w-5 h-5"></i>
+                                <span>Download</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                <SKCanvasView @ref="data.CanvasReference"
-                              OnPaintSurface="@data.OnPaintSurface"
-                              style="@($"height: {data.Height}px; width: {data.Width}px;")"
-                              id="@data.Id" IgnorePixelScaling=true />
-            </MudItem>
-        </MudStack>
-    </MudContainer>
+                <!-- Preview Panel -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-6">Preview</h2>
+                    
+                    <div class="flex justify-center">
+                        <div class="bg-slate-50 rounded-xl p-4 border-2 border-slate-200">
+                            <SKCanvasView 
+                                @ref="data.CanvasReference"
+                                OnPaintSurface="@data.OnPaintSurface"
+                                style="@($"height: {data.Height}px; width: {data.Width}px; border-radius: 8px;")"
+                                id="@data.Id" 
+                                IgnorePixelScaling="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="mt-8 bg-white rounded-2xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-slate-800 mb-4">About Linked Lines</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    This algorithm creates beautiful patterns by connecting random points with lines. 
+                    Each generation produces a unique artwork with varying line weights, colors, and connections. 
+                    Perfect for creating abstract wallpapers with mathematical beauty.
+                </p>
+            </div>
+        </div>
+    </div>
 }
-else
-{
-    <MudText Typo="Typo.subtitle1">Something is not right/ Or Developer Has Not created Page for this url</MudText>
-}
-<style>
-    .center-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
