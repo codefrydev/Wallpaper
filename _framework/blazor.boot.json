@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Wallpaper",
   "resources": {
-    "hash": "sha256-XyMujJBu1i7oJQHtiLaW4199ns9u88SDnyIFixSOZPk=",
+    "hash": "sha256-qNCsREoVNy4fzhGLq35AvYpY9VS3pZVTXGBpxv8B20A=",
     "jsModuleNative": {
       "dotnet.native.8.0.19.ga65odbxmj.js": "sha256-LfplqsvHh4hZArcBXUt/1eYKygXmJHFdXtX6YUkucFs="
     },
@@ -9,7 +9,7 @@
       "dotnet.runtime.8.0.19.fuw8bil2cq.js": "sha256-91CDXCvYTrWqTidtPWAY6j9w/EQtJKjSj9VneQwl020="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-V5jyW8pkT9G3p2hi+vKq8eks23+hEaSZrdw4VPzEp6w="
+      "dotnet.native.wasm": "sha256-wLVu55z7f00NekKShvSNOZ6v5QJgg3He9RMzmnmFiCA="
     },
     "icu": {
       "icudt_CJK.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -42,16 +42,16 @@
       "System.Memory.wasm": "sha256-bURIbPto05tDGDr8ybTjg0IdJuQsmFLu5BerYcKDibM=",
       "System.Net.Http.wasm": "sha256-MXwuSA8vhh7XixzsQ9SduMRBsmHgoEv9YwZdD1Ryu0Y=",
       "System.Net.Primitives.wasm": "sha256-SfOfI4jlhfIt6IyWQ6hocfZJ3pDGQXq+dkuxYeluW5c=",
-      "System.Private.CoreLib.wasm": "sha256-VILkwKCdCq2kc38W7uDYSpmREUQpiDnwMdyXwVVOU/0=",
+      "System.Private.CoreLib.wasm": "sha256-FamfWqAWS0HAzEOUOkhY/qJqgV+/ppC9hp7ckzC1g7s=",
       "System.Private.Uri.wasm": "sha256-mn7gjxONUSDqP1pShwHRA9TsGVBTeH16xUBcSJhUuv4=",
       "System.Runtime.InteropServices.JavaScript.wasm": "sha256-Rh0cUpa9Dix5k56M6NTaN3OuPDR8opVBMo8Ggr1hYIg=",
       "System.Runtime.InteropServices.wasm": "sha256-z45BJB4SQWxL6kvc8I2DWi/SnH1EGEAUk/O5C0+1Dak=",
-      "System.Runtime.wasm": "sha256-4JBmHbZqPUr2WaZjhPlAljKCDCLpeasMcCikHpeg5/0=",
+      "System.Runtime.wasm": "sha256-o7Spbb0zt1jeKZLZ302t//NloLjU4FtVk0DvFKlSsgE=",
       "System.Text.Encodings.Web.wasm": "sha256-0Z02HiML03pKH91yj+/s10r4GoV8zDY8hz2FMfCs5B8=",
       "System.Text.Json.wasm": "sha256-DpyBj7RDeDnNugm03Kz9o/eGZbYQBgHPTZi3Z556usw=",
       "System.Text.RegularExpressions.wasm": "sha256-NhfemhQnFW2VjY2KTBxroN34AjRoR6MoboUDHuzO+tU=",
       "System.Threading.wasm": "sha256-ZcQg0QOJ0NzFsAuSv4FuQ2mgPP8Fkeci3bMO17xpEa8=",
-      "Wallpaper.wasm": "sha256-4tdVmpj9YFn7HSyk7DpcMoPTZ8BNm2DfbNzrEvAR0yM="
+      "Wallpaper.wasm": "sha256-V9fXF1ARk9R8MQMrWkQGbszesH585dz3UB7Hd9FAbHw="
     }
   },
   "cacheBootResources": true,
