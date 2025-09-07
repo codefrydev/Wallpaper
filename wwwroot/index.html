@@ -200,30 +200,7 @@
         .loading-container > *:nth-child(4) { animation-delay: 0.4s; }
         .loading-container > *:nth-child(5) { animation-delay: 0.5s; }
 
-        /* Navigation Styles */
-        .nav-link {
-            @apply flex items-center space-x-2 px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 font-medium;
-        }
-
-        .nav-link.active {
-            @apply bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg;
-        }
-
-        .nav-link.active:hover {
-            @apply text-white bg-gradient-to-r from-indigo-600 to-purple-700;
-        }
-
-        .mobile-nav-link {
-            @apply flex items-center space-x-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 font-medium;
-        }
-
-        .mobile-nav-link.active {
-            @apply bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg;
-        }
-
-        .mobile-nav-link.active:hover {
-            @apply text-white bg-gradient-to-r from-indigo-600 to-purple-700;
-        }
+        /* Navigation Styles - Removed */
 
         /* Floating Action Button */
         .fab-btn {
@@ -285,20 +262,7 @@
             animation: pulse-glow 2s ease-in-out infinite;
         }
 
-        /* Mobile Menu Animation */
-        .mobile-menu {
-            transition: all 0.3s ease-in-out;
-        }
-
-        .mobile-menu.hidden {
-            transform: translateY(-100%);
-            opacity: 0;
-        }
-
-        .mobile-menu:not(.hidden) {
-            transform: translateY(0);
-            opacity: 1;
-        }
+        /* Mobile Menu Animation - Removed */
 
         /* Loading Spinner Enhancement */
         .loadinBaba img {
@@ -361,24 +325,15 @@
         }
 
         /* Enhanced Focus States for Accessibility */
-        .nav-link:focus,
-        .mobile-nav-link:focus,
         .btn-primary:focus,
         .btn-secondary:focus,
         .btn-tertiary:focus,
-        .fab-btn:focus,
-        .theme-toggle:focus,
-        .mobile-menu-btn:focus {
+        .fab-btn:focus {
             @apply outline-none ring-2 ring-indigo-500 ring-offset-2 dark:ring-offset-slate-900;
         }
 
         /* Improved Mobile Touch Targets */
         @media (max-width: 768px) {
-            .nav-link,
-            .mobile-nav-link {
-                @apply min-h-[44px];
-            }
-            
             .btn-primary,
             .btn-secondary,
             .btn-tertiary {
@@ -424,6 +379,196 @@
 
         .btn-tertiary {
             @apply bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300 hover:scale-105 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900;
+        }
+
+        /* Pinterest Style Masonry Grid */
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1rem;
+            line-height: 0;
+        }
+
+        @media (min-width: 640px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .masonry-grid {
+                column-count: 3;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masonry-grid {
+                column-count: 4;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .masonry-grid {
+                column-count: 5;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            display: inline-block;
+            width: 100%;
+        }
+
+        /* Pinterest Style Card Hover Effects */
+        .masonry-item:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Google Photos Style Search */
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Pinterest Style Overlay Actions */
+        .overlay-actions {
+            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 640px) {
+            .masonry-grid {
+                column-count: 1;
+                padding: 0 1rem;
+            }
+            
+            .masonry-item {
+                margin-bottom: 0.75rem;
+            }
+        }
+
+        /* Line Clamp Utility */
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Google Photos Style Modal */
+        .modal-overlay {
+            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            max-height: 90vh;
+            max-width: 90vw;
+        }
+
+        /* Pinterest Style Image Aspect Ratios */
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        /* Enhanced Hover Effects */
+        .masonry-item:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        /* Smooth Transitions */
+        .masonry-item {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Pinterest Style Loading States */
+        .masonry-item.loading {
+            opacity: 0.7;
+            transform: scale(0.95);
+        }
+
+        /* Enhanced Mobile Touch Interactions */
+        @media (max-width: 768px) {
+            .masonry-item:active {
+                transform: scale(0.98);
+            }
+            
+            .overlay-actions button {
+                min-width: 44px;
+                min-height: 44px;
+            }
+        }
+
+        /* Pinterest Style Card Shadows */
+        .masonry-item {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+        }
+
+        .masonry-item:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Google Photos Style Search Enhancement */
+        .search-input {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .search-input:focus {
+            transform: scale(1.02);
+        }
+
+        /* Pinterest Style Category Pills */
+        .category-pill {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .category-pill:hover {
+            transform: translateY(-1px);
+        }
+
+        .category-pill.active {
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Draggable Elements */
+        .draggable {
+            cursor: move;
+            user-select: none;
+            transition: none !important;
+        }
+
+        .draggable:hover {
+            cursor: grabbing;
+        }
+
+        .draggable:active {
+            cursor: grabbing;
+        }
+
+        .draggable.dragging {
+            z-index: 9999;
+            transform: rotate(2deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .draggable.dragging * {
+            pointer-events: none;
+        }
+
+        /* Draggable Controls Container */
+        .draggable-controls {
+            position: fixed;
+            z-index: 50;
+            touch-action: none;
+        }
+
+        /* Draggable Download Button */
+        .draggable-download {
+            position: fixed;
+            z-index: 50;
+            touch-action: none;
         }
     </style>
 </head>
@@ -501,32 +646,7 @@
             }
         });
 
-        // Mobile menu toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            
-            if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-            
-            // Close mobile menu when clicking on a link
-            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.add('hidden');
-                });
-            });
-            
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!mobileMenuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
+        // Mobile menu functionality - Removed
         
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -627,6 +747,115 @@
                 document.body.style.opacity = '1';
                 document.body.style.transform = 'translateY(0)';
             }, 100);
+        });
+
+        // Draggable functionality
+        let isDragging = false;
+        let currentElement = null;
+        let offset = { x: 0, y: 0 };
+
+        function makeDraggable(element) {
+            if (!element) return;
+
+            element.addEventListener('mousedown', startDrag);
+            element.addEventListener('touchstart', startDrag, { passive: false });
+            
+            // Prevent default drag behavior on images and other elements
+            element.addEventListener('dragstart', (e) => e.preventDefault());
+        }
+
+        function startDrag(e) {
+            // Only start drag if clicking on the draggable element itself or its direct children
+            if (e.target.closest('input, button, select, textarea')) {
+                return;
+            }
+
+            isDragging = true;
+            currentElement = e.currentTarget;
+            
+            const rect = currentElement.getBoundingClientRect();
+            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+            
+            offset.x = clientX - rect.left;
+            offset.y = clientY - rect.top;
+            
+            currentElement.classList.add('dragging');
+            
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', stopDrag);
+            document.addEventListener('touchmove', drag, { passive: false });
+            document.addEventListener('touchend', stopDrag);
+            
+            e.preventDefault();
+        }
+
+        function drag(e) {
+            if (!isDragging || !currentElement) return;
+            
+            const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+            
+            const x = clientX - offset.x;
+            const y = clientY - offset.y;
+            
+            // Keep element within viewport bounds
+            const rect = currentElement.getBoundingClientRect();
+            const maxX = window.innerWidth - rect.width;
+            const maxY = window.innerHeight - rect.height;
+            
+            const constrainedX = Math.max(0, Math.min(x, maxX));
+            const constrainedY = Math.max(0, Math.min(y, maxY));
+            
+            currentElement.style.left = constrainedX + 'px';
+            currentElement.style.top = constrainedY + 'px';
+            currentElement.style.right = 'auto';
+            currentElement.style.bottom = 'auto';
+            
+            e.preventDefault();
+        }
+
+        function stopDrag() {
+            if (!isDragging || !currentElement) return;
+            
+            isDragging = false;
+            currentElement.classList.remove('dragging');
+            currentElement = null;
+            
+            document.removeEventListener('mousemove', drag);
+            document.removeEventListener('mouseup', stopDrag);
+            document.removeEventListener('touchmove', drag);
+            document.removeEventListener('touchend', stopDrag);
+        }
+
+        // Initialize draggable elements when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make all elements with 'draggable' class draggable
+            const draggableElements = document.querySelectorAll('.draggable');
+            draggableElements.forEach(makeDraggable);
+            
+            // Use MutationObserver to handle dynamically added elements
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1) { // Element node
+                            if (node.classList && node.classList.contains('draggable')) {
+                                makeDraggable(node);
+                            }
+                            // Check child elements
+                            const childDraggables = node.querySelectorAll && node.querySelectorAll('.draggable');
+                            if (childDraggables) {
+                                childDraggables.forEach(makeDraggable);
+                            }
+                        }
+                    });
+                });
+            });
+            
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
         });
     </script>
 </body>

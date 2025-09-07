@@ -3,119 +3,56 @@
 @inject Data Datas
 <PageTitle>Creative Art - Wallpaper Studio</PageTitle>
 
+<!-- Pinterest Style Masonry Grid -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Header Section -->
-    <div class="hero-section relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 dark:from-purple-500/10 dark:to-pink-500/10"></div>
-        <div class="relative text-center space-y-6">
-            <div class="inline-flex items-center space-x-2 px-6 py-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full border border-purple-200 dark:border-purple-700 text-sm text-purple-600 dark:text-purple-400 font-medium mb-6 shadow-lg">
-                <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
-                <span>Hand-Crafted Artistic Collection</span>
-            </div>
-            <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-                <i class="fas fa-image w-10 h-10 text-white"></i>
-            </div>
-            <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Creative Art Gallery
-            </h1>
-            <p class="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
-                Immerse yourself in a curated collection of hand-drawn artistic wallpapers. 
-                Each piece tells a story, crafted with passion by talented artists.
-            </p>
-        </div>
-    </div>
-
-    <!-- Art Gallery Grid -->
-    <div class="art-grid mb-16">
-        @foreach(var item in Datas.VideosData)
-        {
-            <div class="group cursor-pointer" @onclick="@(()=>OpenDialog(item))" role="button" tabindex="0" @onkeypress="@((e) => { if (e.Key == "Enter") OpenDialog(item); })" aria-label="View @item.Name artwork">
-                <div class="art-card card-hover relative overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 dark:from-purple-500/10 dark:to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative text-center space-y-6 p-6">
-                        <!-- Image Container -->
-                        <div class="canvas-container group-hover:scale-105 transition-transform duration-300 overflow-hidden bg-slate-50 dark:bg-slate-700 rounded-xl p-4 border-2 border-slate-200 dark:border-slate-600">
+        <div class="masonry-grid">
+            @foreach(var item in Datas.VideosData)
+            {
+                <div class="masonry-item group cursor-pointer" @onclick="@(()=>OpenDialog(item))" role="button" tabindex="0" @onkeypress="@((e) => { if (e.Key == "Enter") OpenDialog(item); })" aria-label="View @item.Name artwork">
+                    <div class="relative overflow-hidden bg-white dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-105">
+                        <!-- Pinterest Style Image Container -->
+                        <div class="relative">
                             <img 
                                 src="@item.ThumbNailUrl" 
                                 alt="@item.Description" 
-                                class="w-full h-64 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" 
+                                class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300" 
                                 loading="lazy" />
+                            
                         </div>
                         
-                        <!-- Content -->
-                        <div class="space-y-2">
-                            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-1">@item.Name</h3>
-                            <p class="text-slate-600 dark:text-slate-300 text-sm">@item.Description</p>
+                        <!-- Pinterest Style Content -->
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">@item.Name</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-3 line-clamp-2">@item.Description</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-slate-500 dark:text-slate-400">View & Download</span>
+                                <i class="fas fa-arrow-right text-slate-400 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"></i>
+                            </div>
                         </div>
-                        
-                        <!-- Action Button -->
-                        <button class="w-full btn-secondary flex items-center justify-center space-x-2 py-3 font-semibold group-hover:shadow-xl transition-all duration-300">
-                            <i class="fas fa-eye w-5 h-5" aria-hidden="true"></i>
-                            <span>View & Download</span>
-                        </button>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
-
-    <!-- Info Section -->
-    <div class="hero-section bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">About Creative Art</h2>
-            <p class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto font-light">
-                Where human creativity meets digital perfection
-            </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="feature-card group text-center space-y-6">
-                <div class="feature-icon bg-gradient-to-r from-purple-500 to-pink-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-brush w-8 h-8 text-white"></i>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Hand-Crafted</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">Original artwork created by talented artists with passion and skill</p>
-                </div>
-            </div>
-            <div class="feature-card group text-center space-y-6">
-                <div class="feature-icon bg-gradient-to-r from-yellow-500 to-orange-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-star w-8 h-8 text-white"></i>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Curated Collection</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">Carefully selected high-quality pieces from the best artists</p>
-                </div>
-            </div>
-            <div class="feature-card group text-center space-y-6">
-                <div class="feature-icon bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-expand-arrows-alt w-8 h-8 text-white"></i>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">High Resolution</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">Perfect for any screen size and device with crystal clear quality</p>
-                </div>
-            </div>
+            }
         </div>
     </div>
 
-    <!-- Call to Action -->
-    <div class="text-center mt-16">
-        <div class="inline-flex items-center space-x-4 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl shadow-lg">
-            <i class="fas fa-heart w-8 h-8 text-white"></i>
-            <span class="text-white text-xl font-semibold">Discover your next artistic inspiration</span>
-        </div>
-    </div>
-
-    <!-- Custom Modal -->
+    <!-- Google Photos Style Modal -->
     @if (showModal && selectedImage != null)
     {
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm" @onclick="CloseModal">
-            <div class="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden" @onclick:stopPropagation="true">
+        <div class="fixed inset-0 z-50 modal-overlay flex items-center justify-center p-4" @onclick="CloseModal">
+            <div class="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl modal-content w-full overflow-hidden" @onclick:stopPropagation="true">
                 <!-- Modal Header -->
-                <div class="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
-                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">@selectedImage.Name</h3>
+                <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-image w-4 h-4 text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100">@selectedImage.Name</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Creative Artwork</p>
+                        </div>
+                    </div>
                     <button @onclick="CloseModal" class="p-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
-                        <i class="fas fa-times w-6 h-6"></i>
+                        <i class="fas fa-times w-5 h-5"></i>
                     </button>
                 </div>
                 
@@ -124,7 +61,7 @@
                     <div class="flex justify-center mb-6">
                         <img src="@selectedImage.ThumbNailUrl" 
                              alt="@selectedImage.Description" 
-                             class="max-w-full max-h-96 object-contain rounded-lg shadow-lg" />
+                             class="max-w-full max-h-96 object-contain rounded-xl shadow-lg" />
                     </div>
                     
                     @if (!string.IsNullOrEmpty(selectedImage.Description))
@@ -132,7 +69,7 @@
                         <p class="text-slate-600 dark:text-slate-300 text-center mb-6">@selectedImage.Description</p>
                     }
                     
-                    <!-- Modal Actions -->
+                    <!-- Action Buttons -->
                     <div class="flex gap-4 justify-center">
                         <button @onclick="CloseModal" 
                                 class="px-6 py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-medium hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
@@ -148,7 +85,6 @@
             </div>
         </div>
     }
-</div>
 
 @code {
     [Inject] public IJSRuntime JSRuntime { get; set; } = null!;

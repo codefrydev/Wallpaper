@@ -1,135 +1,141 @@
 ﻿@page "/"
 <PageTitle>Wallpaper Studio - Algorithmic Art Generator</PageTitle>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="min-h-screen bg-white dark:bg-slate-900">
     <!-- Hero Section -->
-    <div class="hero-section relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/5 to-purple-500/5 dark:from-indigo-500/10 dark:to-purple-500/10"></div>
-        <div class="relative text-center space-y-8">
-            <!-- Status Badge -->
-            <div class="inline-flex items-center space-x-2 px-6 py-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full border border-indigo-200 dark:border-indigo-700 text-sm text-indigo-600 dark:text-indigo-400 font-medium mb-6 shadow-lg">
-                <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span>Algorithm-Powered Art Generation</span>
-            </div>
-            
-            <!-- Main Heading -->
-            <div class="space-y-4">
-                <h1 class="text-5xl md:text-7xl font-bold leading-tight">
-                    <span class="bg-gradient-to-r from-slate-800 to-slate-600 dark:from-slate-100 dark:to-slate-300 bg-clip-text text-transparent">
-                        Create Stunning
-                    </span>
-                    <br />
-                    <span class="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent">
-                        Digital Art
-                    </span>
-                </h1>
-                <p class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-4xl mx-auto leading-relaxed font-light">
-                    Transform your screen with algorithm-generated masterpieces or explore hand-crafted artistic wallpapers. 
-                    Every creation is unique, every download is instant.
-                </p>
-            </div>
+    <div class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center space-y-8">
+                <!-- Logo and Title -->
+                <div class="flex justify-center">
+                    <div class="w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-2xl">
+                        <span class="text-4xl">🎨</span>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+                        <span class="bg-gradient-to-r from-slate-800 to-slate-600 dark:from-slate-100 dark:to-slate-300 bg-clip-text text-transparent">
+                            Wallpaper
+                        </span>
+                        <br />
+                        <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                            Studio
+                        </span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-4xl mx-auto leading-relaxed font-light">
+                        Transform your screen with algorithm-generated masterpieces or explore hand-crafted artistic wallpapers. 
+                        Every creation is unique, every download is instant.
+                    </p>
+                </div>
 
-            <!-- Feature Pills -->
-            <div class="flex flex-wrap justify-center gap-3 mt-8">
-                <div class="flex items-center space-x-2 px-4 py-2 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-full text-sm font-medium">
-                    <i class="fas fa-check-circle w-4 h-4"></i>
-                    <span>100% Free</span>
-                </div>
-                <div class="flex items-center space-x-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 rounded-full text-sm font-medium">
-                    <i class="fas fa-hd-video w-4 h-4"></i>
-                    <span>High Resolution</span>
-                </div>
-                <div class="flex items-center space-x-2 px-4 py-2 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-400 rounded-full text-sm font-medium">
-                    <i class="fas fa-download w-4 h-4"></i>
-                    <span>Instant Download</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mode Selection Cards -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-        @foreach (var mode in modes)
-        {
-            <div class="group cursor-pointer" @onclick="@(()=>Selected(mode))" role="button" tabindex="0" @onkeypress="@((e) => { if (e.Key == "Enter") Selected(mode); })">
-                <div class="art-card card-hover relative overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 dark:from-indigo-500/10 dark:to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative text-center space-y-8 p-8">
-                        <!-- Icon -->
-                        <div class="flex justify-center">
-                            <div class="w-24 h-24 rounded-3xl bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                                @if (mode.Name == "Creative")
-                                {
-                                    <i class="fas fa-image w-12 h-12"></i>
-                                }
-                                else
-                                {
-                                    <i class="fas fa-magic w-12 h-12"></i>
-                                }
-                            </div>
-                        </div>
-                        
-                        <!-- Content -->
-                        <div class="space-y-4">
-                            <h3 class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-3">@mode.Name</h3>
-                            <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">@mode.Description</p>
-                        </div>
-                        
-                        <!-- Action Button -->
-                        <button class="w-full btn-primary flex items-center justify-center space-x-3 py-4 text-lg font-semibold group-hover:shadow-xl transition-all duration-300">
-                            <span>Explore @mode.Name</span>
-                            <i class="fas fa-arrow-right w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"></i>
-                        </button>
+                <!-- Feature Pills -->
+                <div class="flex flex-wrap justify-center gap-3 mt-8">
+                    <div class="flex items-center space-x-2 px-4 py-2 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-full text-sm font-medium">
+                        <span class="text-lg">✅</span>
+                        <span>100% Free</span>
+                    </div>
+                    <div class="flex items-center space-x-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 rounded-full text-sm font-medium">
+                        <span class="text-lg">📱</span>
+                        <span>High Resolution</span>
+                    </div>
+                    <div class="flex items-center space-x-2 px-4 py-2 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-400 rounded-full text-sm font-medium">
+                        <span class="text-lg">⬇️</span>
+                        <span>Instant Download</span>
                     </div>
                 </div>
             </div>
-        }
-    </div>
-
-    <!-- Features Section -->
-    <div class="hero-section bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">Why Choose Wallpaper Studio?</h2>
-            <p class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto font-light">
-                Experience the perfect blend of technology and artistry
-            </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="feature-card group text-center space-y-6">
-                <div class="feature-icon bg-gradient-to-r from-indigo-500 to-purple-600 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-magic w-8 h-8 text-white"></i>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Algorithm-Generated Art</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">Unique patterns created by advanced algorithms that never repeat</p>
-                </div>
-            </div>
-            <div class="feature-card group text-center space-y-6">
-                <div class="feature-icon bg-gradient-to-r from-purple-500 to-pink-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-image w-8 h-8 text-white"></i>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Hand-Crafted Art</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">Curated collection of artistic wallpapers by talented creators</p>
-                </div>
-            </div>
-            <div class="feature-card group text-center space-y-6">
-                <div class="feature-icon bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-download w-8 h-8 text-white"></i>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Instant Download</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">High-quality wallpapers ready for any device in seconds</p>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- Call to Action -->
-    <div class="text-center mt-20">
-        <div class="inline-flex items-center space-x-4 px-10 py-6 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105">
-            <i class="fas fa-bolt w-8 h-8 text-white"></i>
-            <span class="text-white text-xl font-semibold">Ready to create your perfect wallpaper?</span>
+    <!-- Two Card Selection -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            @foreach (var mode in modes)
+            {
+                <div class="group cursor-pointer" @onclick="@(()=>Selected(mode))" role="button" tabindex="0" @onkeypress="@((e) => { if (e.Key == "Enter") Selected(mode); })">
+                    <div class="relative overflow-hidden bg-white dark:bg-slate-800 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 group-hover:scale-105 border border-slate-200 dark:border-slate-700">
+                        <!-- Card Image Container -->
+                        <div class="relative overflow-hidden">
+                            @if (mode.Name == "Creative")
+                            {
+                                <div class="aspect-video bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 flex items-center justify-center relative group-hover:scale-110 transition-transform duration-500">
+                                    <!-- Creative Art Preview -->
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
+                                    <div class="relative z-10 text-center text-white group-hover:scale-105 transition-transform duration-300">
+                                        <div class="grid grid-cols-2 gap-2 mb-4">
+                                            <div class="w-8 h-8 bg-white/30 rounded-lg flex items-center justify-center group-hover:bg-white/40 transition-colors duration-300">
+                                                <span class="text-lg group-hover:scale-110 transition-transform duration-300">🎨</span>
+                                            </div>
+                                            <div class="w-8 h-8 bg-white/30 rounded-lg flex items-center justify-center group-hover:bg-white/40 transition-colors duration-300">
+                                                <span class="text-lg group-hover:scale-110 transition-transform duration-300">🖌️</span>
+                                            </div>
+                                            <div class="w-8 h-8 bg-white/30 rounded-lg flex items-center justify-center group-hover:bg-white/40 transition-colors duration-300">
+                                                <span class="text-lg group-hover:scale-110 transition-transform duration-300">🖼️</span>
+                                            </div>
+                                            <div class="w-8 h-8 bg-white/30 rounded-lg flex items-center justify-center group-hover:bg-white/40 transition-colors duration-300">
+                                                <span class="text-lg group-hover:scale-110 transition-transform duration-300">💖</span>
+                                            </div>
+                                        </div>
+                                        <h3 class="text-lg font-bold">Hand-Crafted Art</h3>
+                                        <p class="text-sm opacity-90">Beautiful artistic designs</p>
+                                    </div>
+                                    <!-- Floating particles effect -->
+                                    <div class="absolute inset-0 pointer-events-none">
+                                        <div class="absolute top-4 left-4 w-2 h-2 bg-white/40 rounded-full animate-pulse"></div>
+                                        <div class="absolute top-8 right-6 w-1 h-1 bg-white/50 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                                        <div class="absolute bottom-6 left-8 w-1.5 h-1.5 bg-white/30 rounded-full animate-pulse" style="animation-delay: 1s;"></div>
+                                        <div class="absolute bottom-4 right-4 w-1 h-1 bg-white/60 rounded-full animate-pulse" style="animation-delay: 1.5s;"></div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="aspect-video bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-600 flex items-center justify-center relative group-hover:scale-110 transition-transform duration-500">
+                                    <!-- Generative Art Preview -->
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
+                                    <div class="relative z-10 text-center text-white group-hover:scale-105 transition-transform duration-300">
+                                        <div class="grid grid-cols-3 gap-1 mb-4">
+                                            <div class="w-6 h-6 bg-white/30 rounded-full group-hover:bg-white/40 transition-colors duration-300 group-hover:scale-110"></div>
+                                            <div class="w-6 h-6 bg-white/30 rounded-full group-hover:bg-white/40 transition-colors duration-300 group-hover:scale-110" style="animation-delay: 0.1s;"></div>
+                                            <div class="w-6 h-6 bg-white/30 rounded-full group-hover:bg-white/40 transition-colors duration-300 group-hover:scale-110" style="animation-delay: 0.2s;"></div>
+                                            <div class="w-6 h-6 bg-white/30 rounded-full group-hover:bg-white/40 transition-colors duration-300 group-hover:scale-110" style="animation-delay: 0.3s;"></div>
+                                            <div class="w-6 h-6 bg-white/30 rounded-full group-hover:bg-white/40 transition-colors duration-300 group-hover:scale-110" style="animation-delay: 0.4s;"></div>
+                                            <div class="w-6 h-6 bg-white/30 rounded-full group-hover:bg-white/40 transition-colors duration-300 group-hover:scale-110" style="animation-delay: 0.5s;"></div>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <div class="w-16 h-1 bg-white/40 rounded mx-auto group-hover:bg-white/50 transition-colors duration-300 group-hover:scale-105"></div>
+                                            <div class="w-12 h-1 bg-white/30 rounded mx-auto group-hover:bg-white/40 transition-colors duration-300 group-hover:scale-105" style="animation-delay: 0.1s;"></div>
+                                            <div class="w-14 h-1 bg-white/35 rounded mx-auto group-hover:bg-white/45 transition-colors duration-300 group-hover:scale-105" style="animation-delay: 0.2s;"></div>
+                                        </div>
+                                        <h3 class="text-lg font-bold mt-2">Algorithm Generated</h3>
+                                        <p class="text-sm opacity-90">Mathematical patterns</p>
+                                    </div>
+                                    <!-- Animated grid lines -->
+                                    <div class="absolute inset-0 pointer-events-none">
+                                        <div class="absolute top-1/4 left-0 right-0 h-px bg-white/20 group-hover:bg-white/30 transition-colors duration-300"></div>
+                                        <div class="absolute top-1/2 left-0 right-0 h-px bg-white/20 group-hover:bg-white/30 transition-colors duration-300"></div>
+                                        <div class="absolute top-3/4 left-0 right-0 h-px bg-white/20 group-hover:bg-white/30 transition-colors duration-300"></div>
+                                        <div class="absolute left-1/4 top-0 bottom-0 w-px bg-white/20 group-hover:bg-white/30 transition-colors duration-300"></div>
+                                        <div class="absolute left-1/2 top-0 bottom-0 w-px bg-white/20 group-hover:bg-white/30 transition-colors duration-300"></div>
+                                        <div class="absolute left-3/4 top-0 bottom-0 w-px bg-white/20 group-hover:bg-white/30 transition-colors duration-300"></div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        
+                        <!-- Card Content -->
+                        <div class="p-8">
+                            <h3 class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-3">@mode.Name</h3>
+                            <p class="text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">@mode.Description</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">Explore Collection</span>
+                                <span class="text-slate-400 text-lg group-hover:translate-x-2 transition-transform duration-300">→</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>

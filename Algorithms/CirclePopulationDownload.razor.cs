@@ -27,6 +27,7 @@ namespace Wallpaper.Algorithms
             numberOfAttempts = circlePopulationRef.createCircleAttempts;
         }
         [Inject] public IJSRuntime JsRuntime { get; set; } = null!;
+        [Inject] public NavigationManager Navigation { get; set; } = null!;
 
         [Parameter] public GenerativeDrawScafolding dummy { get; set; } = new();
         async Task GenerateImage()

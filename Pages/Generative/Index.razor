@@ -1,110 +1,38 @@
 ﻿@page "/Generative"
 <PageTitle>Generative Art - Wallpaper Studio</PageTitle>
 
+<!-- Pinterest Style Masonry Grid -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Header Section -->
-    <div class="hero-section relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/5 to-purple-500/5 dark:from-indigo-500/10 dark:to-purple-500/10"></div>
-        <div class="relative text-center space-y-6">
-            <div class="inline-flex items-center space-x-2 px-6 py-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full border border-indigo-200 dark:border-indigo-700 text-sm text-indigo-600 dark:text-indigo-400 font-medium mb-6 shadow-lg">
-                <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                <span>Algorithm-Powered Pattern Generation</span>
-            </div>
-            <div class="w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-                <i class="fas fa-magic w-10 h-10 text-white"></i>
-            </div>
-            <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                Generative Art Gallery
-            </h1>
-            <p class="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
-                Discover infinite possibilities with algorithm-generated patterns. Each creation is unique, 
-                mathematically beautiful, and ready to become your perfect wallpaper.
-            </p>
-        </div>
-    </div>
-
-    <!-- Art Gallery Grid -->
-    <div class="art-grid mb-16">
-        @foreach (var item in generativeDraws)
-        {
-            <div class="group cursor-pointer" @onclick="@(()=>NavigateTo(item))" role="button" tabindex="0" @onkeypress="@((e) => { if (e.Key == "Enter") NavigateTo(item); })" aria-label="View @item.GetType().Name artwork">
-                <div class="art-card card-hover relative overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 dark:from-indigo-500/10 dark:to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative text-center space-y-6 p-6">
-                        <!-- Canvas Container -->
-                        <div class="canvas-container group-hover:scale-105 transition-transform duration-300 bg-slate-50 dark:bg-slate-700 rounded-xl p-4 border-2 border-slate-200 dark:border-slate-600">
-                            <SKCanvasView 
-                                @ref="item.CanvasReference"
-                                OnPaintSurface="@item.OnPaintSurface"
-                                style="@($"height: {item.Height}px; width: {item.Width}px; border-radius: 8px;")"
-                                @onclick="@(()=>NavigateTo(item))" 
-                                id="@item.Id" 
-                                IgnorePixelScaling="true" />
+        <div class="masonry-grid">
+            @foreach (var item in generativeDraws)
+            {
+                <div class="masonry-item group cursor-pointer" @onclick="@(()=>NavigateTo(item))" role="button" tabindex="0" @onkeypress="@((e) => { if (e.Key == "Enter") NavigateTo(item); })" aria-label="View @item.GetType().Name artwork">
+                    <div class="relative overflow-hidden bg-white dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-105">
+                        <!-- Pinterest Style Canvas Container -->
+                        <div class="relative">
+                            <div class="bg-slate-50 dark:bg-slate-700 p-4">
+                                <SKCanvasView 
+                                    @ref="item.CanvasReference"
+                                    OnPaintSurface="@item.OnPaintSurface"
+                                    style="@($"height: {item.Height}px; width: {item.Width}px; border-radius: 8px;")"
+                                    @onclick="@(()=>NavigateTo(item))" 
+                                    id="@item.Id" 
+                                    IgnorePixelScaling="true" />
+                            </div>
+                            
                         </div>
                         
-                        <!-- Content -->
-                        <div class="space-y-2">
-                            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-1">@item.GetType().Name</h3>
-                            <p class="text-slate-600 dark:text-slate-300 text-sm">Algorithmic pattern generation</p>
+                        <!-- Pinterest Style Content -->
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">@item.GetType().Name</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">Algorithmic pattern generation</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-slate-500 dark:text-slate-400">Customize & Download</span>
+                                <i class="fas fa-arrow-right text-slate-400 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"></i>
+                            </div>
                         </div>
-                        
-                        <!-- Action Button -->
-                        <button class="w-full btn-primary flex items-center justify-center space-x-2 py-3 font-semibold group-hover:shadow-xl transition-all duration-300">
-                            <i class="fas fa-download w-5 h-5" aria-hidden="true"></i>
-                            <span>Customize & Download</span>
-                        </button>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
-
-    <!-- Info Section -->
-    <div class="hero-section bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">How Generative Art Works</h2>
-            <p class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto font-light">
-                Experience the magic of algorithmic creativity
-            </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="feature-card group text-center space-y-6">
-                <div class="feature-icon bg-gradient-to-r from-indigo-500 to-purple-600 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-cpu w-8 h-8 text-white"></i>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Smart Algorithms</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">Advanced mathematical algorithms create unique, never-repeating patterns</p>
-                </div>
-            </div>
-            <div class="feature-card group text-center space-y-6">
-                <div class="feature-icon bg-gradient-to-r from-purple-500 to-pink-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-cog w-8 h-8 text-white"></i>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Customizable</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">Adjust colors, size, and parameters to create your perfect design</p>
-                </div>
-            </div>
-            <div class="feature-card group text-center space-y-6">
-                <div class="feature-icon bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-wand-magic-sparkles w-8 h-8 text-white"></i>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Instant Download</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">Get high-resolution wallpapers instantly, ready for any device</p>
-                </div>
-            </div>
+            }
         </div>
     </div>
-
-    <!-- Call to Action -->
-    <div class="text-center mt-16">
-        <div class="inline-flex items-center space-x-4 px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl shadow-lg">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            <span class="text-white text-xl font-semibold">Ready to create your algorithmic masterpiece?</span>
-        </div>
-    </div>
-</div>

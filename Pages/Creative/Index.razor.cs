@@ -6,6 +6,8 @@ namespace Wallpaper.Pages.Creative
 {
     public partial class Index
     { 
+        [Inject] public NavigationManager Navigation { get; set; } = null!;
+        
         protected override async Task OnInitializedAsync()
         {
             Datas.OnChange += StateHasChanged;
