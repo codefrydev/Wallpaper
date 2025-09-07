@@ -1,43 +1,56 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
 
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
     <!-- Navigation Header -->
-    <nav class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200/50 shadow-sm">
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-white/90 dark:bg-slate-900/90 border-b border-slate-200/50 dark:border-slate-700/50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
-                <div class="flex items-center space-x-3 cursor-pointer" @onclick="@(() => Navigation.NavigateTo("/"))">
-                    <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <div class="flex items-center space-x-3 cursor-pointer group" @onclick="@(() => Navigation.NavigateTo("/"))" role="button" tabindex="0" @onkeypress="@((e) => { if (e.Key == "Enter") Navigation.NavigateTo("/"); })">
+                    <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-palette w-6 h-6 text-white"></i>
                     </div>
                     <div>
                         <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                             Wallpaper Studio
                         </h1>
-                        <p class="text-xs text-slate-500 -mt-1">Algorithmic Art Generator</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 -mt-1">Algorithmic Art Generator</p>
                     </div>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden md:flex items-center space-x-1">
-        <a href="/" class="nav-link @(GetActiveClass("/"))">
-            <i class="fas fa-home w-4 h-4"></i>
-            <span>Home</span>
-        </a>
-        <a href="/Generative" class="nav-link @(GetActiveClass("/Generative"))">
-            <i class="fas fa-magic w-4 h-4"></i>
-            <span>Generative</span>
-        </a>
-        <a href="/Creative" class="nav-link @(GetActiveClass("/Creative"))">
-            <i class="fas fa-image w-4 h-4"></i>
-            <span>Creative</span>
-        </a>
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="/" class="nav-link @(GetActiveClass("/"))" aria-label="Go to Home page">
+                        <i class="fas fa-home w-4 h-4" aria-hidden="true"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="/Generative" class="nav-link @(GetActiveClass("/Generative"))" aria-label="Go to Generative Art page">
+                        <i class="fas fa-magic w-4 h-4" aria-hidden="true"></i>
+                        <span>Generative</span>
+                    </a>
+                    <a href="/Creative" class="nav-link @(GetActiveClass("/Creative"))" aria-label="Go to Creative Art page">
+                        <i class="fas fa-image w-4 h-4" aria-hidden="true"></i>
+                        <span>Creative</span>
+                    </a>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button class="mobile-menu-btn p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+                <!-- Theme Toggle & Mobile Menu Button -->
+                <div class="flex items-center space-x-2">
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" 
+                            @onclick="ToggleTheme" 
+                            aria-label="Toggle dark mode">
+                        <i class="fas fa-moon dark:hidden w-5 h-5"></i>
+                        <i class="fas fa-sun hidden dark:block w-5 h-5"></i>
+                    </button>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button class="mobile-menu-btn p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors md:hidden" 
+                            @onclick="ToggleMobileMenu" 
+                            aria-label="Toggle mobile menu"
+                            aria-expanded="@isMobileMenuOpen">
                         <i class="fas fa-bars w-6 h-6"></i>
                     </button>
                 </div>
@@ -45,18 +58,18 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div class="mobile-menu hidden md:hidden bg-white/95 backdrop-blur-md border-t border-slate-200/50">
+        <div class="mobile-menu @(isMobileMenuOpen ? "block" : "hidden") md:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200/50 dark:border-slate-700/50">
             <div class="px-4 py-2 space-y-1">
-                <a href="/" class="mobile-nav-link @(GetActiveClass("/"))">
-                    <i class="fas fa-home w-5 h-5"></i>
+                <a href="/" class="mobile-nav-link @(GetActiveClass("/"))" @onclick="CloseMobileMenu">
+                    <i class="fas fa-home w-5 h-5" aria-hidden="true"></i>
                     <span>Home</span>
                 </a>
-                <a href="/Generative" class="mobile-nav-link @(GetActiveClass("/Generative"))">
-                    <i class="fas fa-magic w-5 h-5"></i>
+                <a href="/Generative" class="mobile-nav-link @(GetActiveClass("/Generative"))" @onclick="CloseMobileMenu">
+                    <i class="fas fa-magic w-5 h-5" aria-hidden="true"></i>
                     <span>Generative Art</span>
                 </a>
-                <a href="/Creative" class="mobile-nav-link @(GetActiveClass("/Creative"))">
-                    <i class="fas fa-image w-5 h-5"></i>
+                <a href="/Creative" class="mobile-nav-link @(GetActiveClass("/Creative"))" @onclick="CloseMobileMenu">
+                    <i class="fas fa-image w-5 h-5" aria-hidden="true"></i>
                     <span>Creative Art</span>
                 </a>
             </div>
@@ -70,13 +83,60 @@
 
     <!-- Floating Action Button -->
     <div class="fixed bottom-6 right-6 z-40">
-        <button class="fab-btn group" @onclick="@(() => Navigation.NavigateTo("/"))" title="Back to Home">
-            <i class="fas fa-home w-6 h-6 transition-transform group-hover:scale-110"></i>
+        <button class="fab-btn group" 
+                @onclick="@(() => Navigation.NavigateTo("/"))" 
+                title="Back to Home"
+                aria-label="Go back to home page">
+            <i class="fas fa-home w-6 h-6 transition-transform group-hover:scale-110" aria-hidden="true"></i>
         </button>
     </div>
 </div>
 
 @code {
+    private bool isMobileMenuOpen = false;
+    private bool isDarkMode = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Check for saved theme preference
+            var savedTheme = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "theme");
+            if (savedTheme == "dark" || (savedTheme == null && await JSRuntime.InvokeAsync<bool>("window.matchMedia('(prefers-color-scheme: dark)').matches")))
+            {
+                isDarkMode = true;
+                await JSRuntime.InvokeVoidAsync("document.documentElement.classList.add", "dark");
+            }
+            StateHasChanged();
+        }
+    }
+
+    private async Task ToggleTheme()
+    {
+        isDarkMode = !isDarkMode;
+        if (isDarkMode)
+        {
+            await JSRuntime.InvokeVoidAsync("document.documentElement.classList.add", "dark");
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", "theme", "dark");
+        }
+        else
+        {
+            await JSRuntime.InvokeVoidAsync("document.documentElement.classList.remove", "dark");
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", "theme", "light");
+        }
+        StateHasChanged();
+    }
+
+    private void ToggleMobileMenu()
+    {
+        isMobileMenuOpen = !isMobileMenuOpen;
+    }
+
+    private void CloseMobileMenu()
+    {
+        isMobileMenuOpen = false;
+    }
+
     private string GetActiveClass(string path)
     {
         var currentPath = Navigation.Uri.Replace(Navigation.BaseUri, "").TrimStart('/');

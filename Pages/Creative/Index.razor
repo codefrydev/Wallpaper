@@ -6,9 +6,9 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Header Section -->
     <div class="hero-section relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 dark:from-purple-500/10 dark:to-pink-500/10"></div>
         <div class="relative text-center space-y-6">
-            <div class="inline-flex items-center space-x-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-purple-200 text-sm text-purple-600 font-medium mb-4">
+            <div class="inline-flex items-center space-x-2 px-6 py-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full border border-purple-200 dark:border-purple-700 text-sm text-purple-600 dark:text-purple-400 font-medium mb-6 shadow-lg">
                 <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
                 <span>Hand-Crafted Artistic Collection</span>
             </div>
@@ -18,7 +18,7 @@
             <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                 Creative Art Gallery
             </h1>
-            <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            <p class="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
                 Immerse yourself in a curated collection of hand-drawn artistic wallpapers. 
                 Each piece tells a story, crafted with passion by talented artists.
             </p>
@@ -29,22 +29,28 @@
     <div class="art-grid mb-16">
         @foreach(var item in Datas.VideosData)
         {
-            <div class="group cursor-pointer" @onclick="@(()=>OpenDialog(item))">
-                <div class="art-card card-hover relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative text-center space-y-4">
-                        <div class="canvas-container group-hover:scale-105 transition-transform duration-300 overflow-hidden">
+            <div class="group cursor-pointer" @onclick="@(()=>OpenDialog(item))" role="button" tabindex="0" @onkeypress="@((e) => { if (e.Key == "Enter") OpenDialog(item); })" aria-label="View @item.Name artwork">
+                <div class="art-card card-hover relative overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 dark:from-purple-500/10 dark:to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative text-center space-y-6 p-6">
+                        <!-- Image Container -->
+                        <div class="canvas-container group-hover:scale-105 transition-transform duration-300 overflow-hidden bg-slate-50 dark:bg-slate-700 rounded-xl p-4 border-2 border-slate-200 dark:border-slate-600">
                             <img 
                                 src="@item.ThumbNailUrl" 
                                 alt="@item.Description" 
-                                class="w-full h-64 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" />
+                                class="w-full h-64 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" 
+                                loading="lazy" />
                         </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-800 mb-1">@item.Name</h3>
-                            <p class="text-slate-600 text-sm">@item.Description</p>
+                        
+                        <!-- Content -->
+                        <div class="space-y-2">
+                            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-1">@item.Name</h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">@item.Description</p>
                         </div>
-                        <button class="w-full btn-secondary flex items-center justify-center space-x-2 py-3">
-                            <i class="fas fa-eye w-5 h-5"></i>
+                        
+                        <!-- Action Button -->
+                        <button class="w-full btn-secondary flex items-center justify-center space-x-2 py-3 font-semibold group-hover:shadow-xl transition-all duration-300">
+                            <i class="fas fa-eye w-5 h-5" aria-hidden="true"></i>
                             <span>View & Download</span>
                         </button>
                     </div>
@@ -54,34 +60,40 @@
     </div>
 
     <!-- Info Section -->
-    <div class="hero-section">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-slate-800 mb-4">About Creative Art</h2>
-            <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+    <div class="hero-section bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">About Creative Art</h2>
+            <p class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto font-light">
                 Where human creativity meets digital perfection
             </p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="feature-card group">
-                <div class="feature-icon bg-gradient-to-r from-purple-500 to-pink-500 group-hover:scale-110 transition-transform duration-300">
+            <div class="feature-card group text-center space-y-6">
+                <div class="feature-icon bg-gradient-to-r from-purple-500 to-pink-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                     <i class="fas fa-brush w-8 h-8 text-white"></i>
                 </div>
-                <h3 class="text-2xl font-bold text-slate-800">Hand-Crafted</h3>
-                <p class="text-slate-600 text-lg">Original artwork created by talented artists with passion and skill</p>
+                <div class="space-y-3">
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Hand-Crafted</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">Original artwork created by talented artists with passion and skill</p>
+                </div>
             </div>
-            <div class="feature-card group">
-                <div class="feature-icon bg-gradient-to-r from-yellow-500 to-orange-500 group-hover:scale-110 transition-transform duration-300">
+            <div class="feature-card group text-center space-y-6">
+                <div class="feature-icon bg-gradient-to-r from-yellow-500 to-orange-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                     <i class="fas fa-star w-8 h-8 text-white"></i>
                 </div>
-                <h3 class="text-2xl font-bold text-slate-800">Curated Collection</h3>
-                <p class="text-slate-600 text-lg">Carefully selected high-quality pieces from the best artists</p>
+                <div class="space-y-3">
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Curated Collection</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">Carefully selected high-quality pieces from the best artists</p>
+                </div>
             </div>
-            <div class="feature-card group">
-                <div class="feature-icon bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:scale-110 transition-transform duration-300">
+            <div class="feature-card group text-center space-y-6">
+                <div class="feature-icon bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                     <i class="fas fa-expand-arrows-alt w-8 h-8 text-white"></i>
                 </div>
-                <h3 class="text-2xl font-bold text-slate-800">High Resolution</h3>
-                <p class="text-slate-600 text-lg">Perfect for any screen size and device with crystal clear quality</p>
+                <div class="space-y-3">
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">High Resolution</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">Perfect for any screen size and device with crystal clear quality</p>
+                </div>
             </div>
         </div>
     </div>
@@ -98,11 +110,11 @@
     @if (showModal && selectedImage != null)
     {
         <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm" @onclick="CloseModal">
-            <div class="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden" @onclick:stopPropagation="true">
+            <div class="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden" @onclick:stopPropagation="true">
                 <!-- Modal Header -->
-                <div class="flex items-center justify-between p-6 border-b border-slate-200">
-                    <h3 class="text-2xl font-bold text-slate-800">@selectedImage.Name</h3>
-                    <button @onclick="CloseModal" class="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                <div class="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">@selectedImage.Name</h3>
+                    <button @onclick="CloseModal" class="p-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
                         <i class="fas fa-times w-6 h-6"></i>
                     </button>
                 </div>
@@ -117,13 +129,13 @@
                     
                     @if (!string.IsNullOrEmpty(selectedImage.Description))
                     {
-                        <p class="text-slate-600 text-center mb-6">@selectedImage.Description</p>
+                        <p class="text-slate-600 dark:text-slate-300 text-center mb-6">@selectedImage.Description</p>
                     }
                     
                     <!-- Modal Actions -->
                     <div class="flex gap-4 justify-center">
                         <button @onclick="CloseModal" 
-                                class="px-6 py-3 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-colors">
+                                class="px-6 py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-medium hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
                             Cancel
                         </button>
                         <button @onclick="@(() => DownloadImage(selectedImage))" 
