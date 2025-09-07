@@ -1,0 +1,350 @@
+@using Models
+@using Algorithms
+@inject IJSRuntime JSRuntime
+
+<!-- Creation Popup Modal -->
+@if (IsVisible)
+{
+    <div class="fixed inset-0 z-50 creation-popup-overlay" @onclick="ClosePopup" @onkeydown="@HandleKeyDown">
+        <div class="creation-popup-container" @onclick:stopPropagation="true">
+            <!-- Header -->
+            <div class="creation-popup-header">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white text-xl">🎨</span>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">Create New Artwork</h2>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Customize your generative art</p>
+                    </div>
+                </div>
+                <button @onclick="ClosePopup" 
+                        class="w-8 h-8 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 rounded-lg transition-colors flex items-center justify-center hover:scale-110">
+                    <span class="text-lg">✕</span>
+                </button>
+            </div>
+
+            <!-- Content -->
+            <div class="creation-popup-content">
+                <!-- Algorithm Selection -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Choose Algorithm</label>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        @foreach (var algorithm in AvailableAlgorithms)
+                        {
+                            <button @onclick="@(() => SelectAlgorithm(algorithm))" 
+                                    class="algorithm-card @(SelectedAlgorithm?.GetType() == algorithm.GetType() ? "algorithm-card-selected" : "")">
+                                <div class="algorithm-preview">
+                                    <SKCanvasView 
+                                        @ref="algorithm.CanvasReference"
+                                        OnPaintSurface="@algorithm.OnPaintSurface"
+                                        style="@($"height: 80px; width: 80px; border-radius: 8px;")"
+                                        id="@algorithm.Id" 
+                                        IgnorePixelScaling="true" />
+                                </div>
+                                <div class="algorithm-info">
+                                    <h3 class="algorithm-name">@algorithm.GetType().Name</h3>
+                                    <p class="algorithm-description">Algorithmic pattern</p>
+                                </div>
+                            </button>
+                        }
+                    </div>
+                </div>
+
+                <!-- Parameters Section -->
+                @if (SelectedAlgorithm != null)
+                {
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Parameters</label>
+                        <div class="parameters-grid">
+                            <!-- Dimensions -->
+                            <div class="parameter-group">
+                                <label class="parameter-label">Dimensions</label>
+                                <div class="flex gap-2">
+                                    <div class="flex-1">
+                                        <input type="number" 
+                                               @bind="Width" 
+                                               @bind:after="UpdatePreview"
+                                               min="100" 
+                                               max="4000" 
+                                               step="50"
+                                               placeholder="Width"
+                                               class="parameter-input" />
+                                        <span class="parameter-unit">px</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <input type="number" 
+                                               @bind="Height" 
+                                               @bind:after="UpdatePreview"
+                                               min="100" 
+                                               max="4000" 
+                                               step="50"
+                                               placeholder="Height"
+                                               class="parameter-input" />
+                                        <span class="parameter-unit">px</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Algorithm-specific parameters -->
+                            @if (SelectedAlgorithm is CirclePopulation circlePop)
+                            {
+                                <div class="parameter-group">
+                                    <label class="parameter-label">Circle Count</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" 
+                                               @bind="circlePop.totalCircles" 
+                                               @bind:after="UpdatePreview"
+                                               min="100" 
+                                               max="2000" 
+                                               step="50"
+                                               class="parameter-slider" />
+                                        <span class="parameter-value">@circlePop.totalCircles</span>
+                                    </div>
+                                </div>
+                                <div class="parameter-group">
+                                    <label class="parameter-label">Radius Range</label>
+                                    <div class="flex gap-2">
+                                        <div class="flex-1">
+                                            <input type="number" 
+                                                   @bind="circlePop.minRadius" 
+                                                   @bind:after="UpdatePreview"
+                                                   min="1" 
+                                                   max="50"
+                                                   placeholder="Min"
+                                                   class="parameter-input" />
+                                        </div>
+                                        <div class="flex-1">
+                                            <input type="number" 
+                                                   @bind="circlePop.maxRadius" 
+                                                   @bind:after="UpdatePreview"
+                                                   min="1" 
+                                                   max="200"
+                                                   placeholder="Max"
+                                                   class="parameter-input" />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else if (SelectedAlgorithm is PointsOnCircle pointsOnCircle)
+                            {
+                                <div class="parameter-group">
+                                    <label class="parameter-label">Circle Radius</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" 
+                                               @bind="pointsOnCircle.Radius" 
+                                               @bind:after="UpdatePreview"
+                                               min="20" 
+                                               max="200" 
+                                               step="5"
+                                               class="parameter-slider" />
+                                        <span class="parameter-value">@pointsOnCircle.Radius</span>
+                                    </div>
+                                </div>
+                                <div class="parameter-group">
+                                    <label class="parameter-label">Iterations</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" 
+                                               @bind="pointsOnCircle.Times" 
+                                               @bind:after="UpdatePreview"
+                                               min="3" 
+                                               max="20" 
+                                               step="1"
+                                               class="parameter-slider" />
+                                        <span class="parameter-value">@pointsOnCircle.Times</span>
+                                    </div>
+                                </div>
+                            }
+                            else if (SelectedAlgorithm is HorizontalLines horizontalLines)
+                            {
+                                <div class="parameter-group">
+                                    <label class="parameter-label">Crowd (Line Density)</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" 
+                                               @bind="horizontalLines.crowd" 
+                                               @bind:after="UpdatePreview"
+                                               min="10" 
+                                               max="200" 
+                                               step="5"
+                                               class="parameter-slider" />
+                                        <span class="parameter-value">@horizontalLines.crowd</span>
+                                    </div>
+                                </div>
+                                <div class="parameter-group">
+                                    <label class="parameter-label">Step (Line Spacing)</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" 
+                                               @bind="horizontalLines.step" 
+                                               @bind:after="UpdatePreview"
+                                               min="1" 
+                                               max="20" 
+                                               step="1"
+                                               class="parameter-slider" />
+                                        <span class="parameter-value">@horizontalLines.step</span>
+                                    </div>
+                                </div>
+                            }
+                            else if (SelectedAlgorithm is GridDots gridDots)
+                            {
+                                <div class="parameter-group">
+                                    <label class="parameter-label">Grid Step</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" 
+                                               @bind="gridDots.step" 
+                                               @bind:after="UpdatePreview"
+                                               min="10" 
+                                               max="50" 
+                                               step="5"
+                                               class="parameter-slider" />
+                                        <span class="parameter-value">@gridDots.step</span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Preview Section -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Preview</label>
+                        <div class="preview-container">
+                            <div class="preview-canvas">
+                                <SKCanvasView 
+                                    @ref="SelectedAlgorithm.CanvasReference"
+                                    OnPaintSurface="@SelectedAlgorithm.OnPaintSurface"
+                                    style="@($"height: {Math.Min(Height, 300)}px; width: {Math.Min(Width, 300)}px; border-radius: 12px;")"
+                                    id="@SelectedAlgorithm.Id" 
+                                    IgnorePixelScaling="true" />
+                            </div>
+                            <div class="preview-actions">
+                                <button @onclick="GeneratePreview" 
+                                        class="preview-button">
+                                    <span class="text-lg">🔄</span>
+                                    <span>Regenerate</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!-- Action Buttons -->
+                <div class="creation-popup-actions">
+                    <div class="flex-1 text-xs text-slate-500 dark:text-slate-400">
+                        <span>💡 Press <kbd class="px-1 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-xs">Esc</kbd> to close, <kbd class="px-1 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-xs">Ctrl+R</kbd> to regenerate, <kbd class="px-1 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-xs">Ctrl+Enter</kbd> to download</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <button @onclick="ClosePopup" 
+                                class="action-button action-button-secondary">
+                            Cancel
+                        </button>
+                        <button @onclick="DownloadArtwork" 
+                                class="action-button action-button-primary"
+                                disabled="@(SelectedAlgorithm == null)">
+                            <span class="text-lg">⬇️</span>
+                            <span>Download</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public List<IGenerativeDraw> AvailableAlgorithms { get; set; } = new();
+
+    private IGenerativeDraw? SelectedAlgorithm;
+    private int Width = 1200;
+    private int Height = 700;
+
+    protected override void OnParametersSet()
+    {
+        if (IsVisible && AvailableAlgorithms.Any())
+        {
+            SelectedAlgorithm = AvailableAlgorithms.First();
+            UpdateAlgorithmDimensions();
+        }
+    }
+
+    private void SelectAlgorithm(IGenerativeDraw algorithm)
+    {
+        SelectedAlgorithm = algorithm;
+        UpdateAlgorithmDimensions();
+        StateHasChanged();
+    }
+
+    private void UpdateAlgorithmDimensions()
+    {
+        if (SelectedAlgorithm != null)
+        {
+            SelectedAlgorithm.Width = Math.Min(Width, 300);
+            SelectedAlgorithm.Height = Math.Min(Height, 300);
+        }
+    }
+
+    private async Task GeneratePreview()
+    {
+        if (SelectedAlgorithm != null)
+        {
+            await SelectedAlgorithm.ButtonClicked();
+            StateHasChanged();
+        }
+    }
+
+    private async Task UpdatePreview()
+    {
+        if (SelectedAlgorithm != null)
+        {
+            UpdateAlgorithmDimensions();
+            await SelectedAlgorithm.ButtonClicked();
+            StateHasChanged();
+        }
+    }
+
+    private async Task DownloadArtwork()
+    {
+        if (SelectedAlgorithm != null)
+        {
+            // Set full dimensions for download
+            var originalWidth = SelectedAlgorithm.Width;
+            var originalHeight = SelectedAlgorithm.Height;
+            
+            SelectedAlgorithm.Width = Width;
+            SelectedAlgorithm.Height = Height;
+            
+            // Trigger download
+            await JSRuntime.InvokeVoidAsync("downloadCanvasAsImage", SelectedAlgorithm.Id, $"{SelectedAlgorithm.GetType().Name}_{DateTime.Now:yyyyMMdd_HHmmss}");
+            
+            // Restore preview dimensions
+            SelectedAlgorithm.Width = originalWidth;
+            SelectedAlgorithm.Height = originalHeight;
+            
+            ClosePopup();
+        }
+    }
+
+    private void ClosePopup()
+    {
+        OnClose.InvokeAsync();
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        switch (e.Key)
+        {
+            case "Escape":
+                ClosePopup();
+                break;
+            case "Enter" when e.CtrlKey:
+                if (SelectedAlgorithm != null)
+                {
+                    await DownloadArtwork();
+                }
+                break;
+            case "r" when e.CtrlKey:
+                await GeneratePreview();
+                break;
+        }
+    }
+}

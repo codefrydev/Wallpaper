@@ -1,38 +1,57 @@
 ﻿@page "/Generative"
+@using Wallpaper.Components
 <PageTitle>Generative Art - Wallpaper Studio</PageTitle>
 
-<!-- Pinterest Style Masonry Grid -->
+<!-- Header with Create Button -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="masonry-grid">
-            @foreach (var item in generativeDraws)
-            {
-                <div class="masonry-item group cursor-pointer" @onclick="@(()=>NavigateTo(item))" role="button" tabindex="0" @onkeypress="@((e) => { if (e.Key == "Enter") NavigateTo(item); })" aria-label="View @item.GetType().Name artwork">
-                    <div class="relative overflow-hidden bg-white dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-105">
-                        <!-- Pinterest Style Canvas Container -->
-                        <div class="relative">
-                            <div class="bg-slate-50 dark:bg-slate-700 p-4">
-                                <SKCanvasView 
-                                    @ref="item.CanvasReference"
-                                    OnPaintSurface="@item.OnPaintSurface"
-                                    style="@($"height: {item.Height}px; width: {item.Width}px; border-radius: 8px;")"
-                                    @onclick="@(()=>NavigateTo(item))" 
-                                    id="@item.Id" 
-                                    IgnorePixelScaling="true" />
-                            </div>
-                            
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h1 class="text-3xl font-bold text-slate-800 dark:text-slate-100">Generative Art</h1>
+            <p class="text-slate-600 dark:text-slate-300 mt-2">Create unique algorithmic patterns</p>
+        </div>
+        <button @onclick="OpenCreationPopup" 
+                class="create-button">
+            <span class="text-lg">✨</span>
+            <span>Create New</span>
+        </button>
+    </div>
+
+    <!-- Pinterest Style Masonry Grid -->
+    <div class="masonry-grid">
+        @foreach (var item in generativeDraws)
+        {
+            <div class="masonry-item group cursor-pointer" @onclick="@(()=>NavigateTo(item))" role="button" tabindex="0" @onkeypress="@((e) => { if (e.Key == "Enter") NavigateTo(item); })" aria-label="View @item.GetType().Name artwork">
+                <div class="relative overflow-hidden bg-white dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-105">
+                    <!-- Pinterest Style Canvas Container -->
+                    <div class="relative">
+                        <div class="bg-slate-50 dark:bg-slate-700 p-4">
+                            <SKCanvasView 
+                                @ref="item.CanvasReference"
+                                OnPaintSurface="@item.OnPaintSurface"
+                                style="@($"height: {item.Height}px; width: {item.Width}px; border-radius: 8px;")"
+                                @onclick="@(()=>NavigateTo(item))" 
+                                id="@item.Id" 
+                                IgnorePixelScaling="true" />
                         </div>
                         
-                        <!-- Pinterest Style Content -->
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">@item.GetType().Name</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">Algorithmic pattern generation</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs text-slate-500 dark:text-slate-400">Customize & Download</span>
-                                <span class="text-slate-400 text-lg group-hover:translate-x-1 transition-transform duration-300">→</span>
-                            </div>
+                    </div>
+                    
+                    <!-- Pinterest Style Content -->
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">@item.GetType().Name</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">Algorithmic pattern generation</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-slate-500 dark:text-slate-400">Customize & Download</span>
+                            <span class="text-slate-400 text-lg group-hover:translate-x-1 transition-transform duration-300">→</span>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
+</div>
+
+<!-- Creation Popup -->
+<CreationPopup IsVisible="@showCreationPopup" 
+               OnClose="@(() => showCreationPopup = false)"
+               AvailableAlgorithms="@generativeDraws" />

@@ -33,6 +33,11 @@ public partial class Index
         Manager.NavigateTo(mode.Location);
     }
 
+    void NavigateToGenerative()
+    {
+        Manager.NavigateTo("Generative");
+    }
+
     public struct Mode
     {
         public string Name { get; set; }

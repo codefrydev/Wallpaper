@@ -8,7 +8,10 @@ public partial class Index
 {
     [Inject]
     public NavigationManager navigationManager { get; set; } = null!;
+    
     List<IGenerativeDraw> generativeDraws = [];
+    private bool showCreationPopup = false;
+    
     protected override Task OnInitializedAsync()
     {
         generativeDraws.Clear();
@@ -20,8 +23,15 @@ public partial class Index
         generativeDraws.Add(new PointsOnCircle());
         return base.OnInitializedAsync();
     }
+    
     void NavigateTo(IGenerativeDraw generativeDraw)
     {
         navigationManager.NavigateTo(generativeDraw.DownloadPath);
+    }
+    
+    void OpenCreationPopup()
+    {
+        showCreationPopup = true;
+        StateHasChanged();
     }
 }

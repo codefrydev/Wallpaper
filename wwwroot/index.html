@@ -569,6 +569,435 @@
             z-index: 50;
             touch-action: none;
         }
+
+        /* Creation Popup Styles */
+        .creation-popup-overlay {
+            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .creation-popup-container {
+            position: relative;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            max-width: 90vw;
+            max-height: 90vh;
+            width: 800px;
+            overflow: hidden;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .dark .creation-popup-container {
+            background: #1e293b;
+        }
+
+        .creation-popup-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dark .creation-popup-header {
+            border-bottom-color: #334155;
+        }
+
+        .creation-popup-content {
+            padding: 24px;
+            max-height: calc(90vh - 120px);
+            overflow-y: auto;
+        }
+
+        .creation-popup-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .dark .creation-popup-actions {
+            border-top-color: #334155;
+        }
+
+        /* Algorithm Selection Cards */
+        .algorithm-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            background: white;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .dark .algorithm-card {
+            background: #334155;
+            border-color: #475569;
+        }
+
+        .algorithm-card:hover {
+            border-color: #6366f1;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+        }
+
+        .algorithm-card-selected {
+            border-color: #6366f1;
+            background: #f0f4ff;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        .dark .algorithm-card-selected {
+            background: #312e81;
+        }
+
+        .algorithm-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f8fafc;
+            margin-bottom: 8px;
+        }
+
+        .dark .algorithm-preview {
+            background: #475569;
+        }
+
+        .algorithm-info {
+            text-align: center;
+        }
+
+        .algorithm-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .dark .algorithm-name {
+            color: #f1f5f9;
+        }
+
+        .algorithm-description {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .dark .algorithm-description {
+            color: #94a3b8;
+        }
+
+        /* Parameters */
+        .parameters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .parameter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .parameter-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .dark .parameter-label {
+            color: #d1d5db;
+        }
+
+        .parameter-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .dark .parameter-input {
+            background: #475569;
+            border-color: #64748b;
+            color: #f1f5f9;
+        }
+
+        .parameter-input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .parameter-slider {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: #e2e8f0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .dark .parameter-slider {
+            background: #475569;
+        }
+
+        .parameter-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #6366f1;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .parameter-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #6366f1;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .parameter-value {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 500;
+            color: #6366f1;
+        }
+
+        .parameter-unit {
+            font-size: 12px;
+            color: #64748b;
+            margin-left: 4px;
+        }
+
+        .dark .parameter-unit {
+            color: #94a3b8;
+        }
+
+        /* Preview Section */
+        .preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .preview-canvas {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            background: #f8fafc;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .preview-canvas {
+            background: #475569;
+            border-color: #64748b;
+        }
+
+        .preview-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .preview-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #f1f5f9;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dark .preview-button {
+            background: #475569;
+            border-color: #64748b;
+            color: #d1d5db;
+        }
+
+        .preview-button:hover {
+            background: #e2e8f0;
+            border-color: #94a3b8;
+        }
+
+        .dark .preview-button:hover {
+            background: #64748b;
+        }
+
+        /* Action Buttons */
+        .action-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .action-button-primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .action-button-primary:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .action-button-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .action-button-secondary {
+            background: #f1f5f9;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .dark .action-button-secondary {
+            background: #475569;
+            color: #d1d5db;
+            border-color: #64748b;
+        }
+
+        .action-button-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .dark .action-button-secondary:hover {
+            background: #64748b;
+        }
+
+        /* Keyboard shortcut styling */
+        kbd {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark kbd {
+            color: #d1d5db;
+            border-color: #64748b;
+            background: #475569;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Create Button */
+        .create-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .create-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .create-button:active {
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .creation-popup-container {
+                width: 95vw;
+                margin: 20px;
+            }
+
+            .creation-popup-header {
+                padding: 16px;
+            }
+
+            .creation-popup-content {
+                padding: 16px;
+            }
+
+            .parameters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .algorithm-card {
+                padding: 12px;
+            }
+
+            .algorithm-preview {
+                width: 60px;
+                height: 60px;
+            }
+
+            .creation-popup-actions {
+                flex-direction: column;
+            }
+
+            .action-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .create-button {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 
@@ -856,6 +1285,53 @@
                 subtree: true
             });
         });
+
+        // Download canvas as image function
+        window.downloadCanvasAsImage = function(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) {
+                console.error('Canvas not found with id:', canvasId);
+                return;
+            }
+
+            // Create a temporary canvas with higher resolution
+            const tempCanvas = document.createElement('canvas');
+            const ctx = tempCanvas.getContext('2d');
+            
+            // Set higher resolution (2x for better quality)
+            const scale = 2;
+            tempCanvas.width = canvas.width * scale;
+            tempCanvas.height = canvas.height * scale;
+            
+            // Scale the context
+            ctx.scale(scale, scale);
+            
+            // Draw the original canvas content
+            ctx.drawImage(canvas, 0, 0);
+            
+            // Convert to blob and download
+            tempCanvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename + '.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }, 'image/png', 1.0);
+        };
+
+        // Download image from URL function
+        window.downloadImageUrl = function(imageUrl, filename) {
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = filename + '.png';
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
     </script>
 </body>
 
