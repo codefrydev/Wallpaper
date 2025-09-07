@@ -26,7 +26,7 @@
                             <p class="text-sm text-slate-600 dark:text-slate-300 mb-3 line-clamp-2">@item.Description</p>
                             <div class="flex items-center justify-between">
                                 <span class="text-xs text-slate-500 dark:text-slate-400">View & Download</span>
-                                <i class="fas fa-arrow-right text-slate-400 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"></i>
+                                <span class="text-slate-400 text-lg group-hover:translate-x-1 transition-transform duration-300">→</span>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                 <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700">
                     <div class="flex items-center space-x-3">
                         <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-image w-4 h-4 text-white"></i>
+                            <span class="text-white text-lg">🖼️</span>
                         </div>
                         <div>
                             <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100">@selectedImage.Name</h3>
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <button @onclick="CloseModal" class="p-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
-                        <i class="fas fa-times w-5 h-5"></i>
+                        <span class="text-lg">✕</span>
                     </button>
                 </div>
                 
@@ -77,7 +77,7 @@
                         </button>
                         <button @onclick="@(() => DownloadImage(selectedImage))" 
                                 class="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-300 flex items-center space-x-2">
-                            <i class="fas fa-download w-5 h-5"></i>
+                            <span class="text-lg">⬇️</span>
                             <span>Download</span>
                         </button>
                     </div>
